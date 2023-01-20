@@ -6,11 +6,12 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:54:09 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/20 16:34:57 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:45:13 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+// #include "Contact.hpp"
 #include <iostream>
 #include <string>
 
@@ -34,42 +35,24 @@ cout/cin for terminal info?
 	-cout for command prompt andw
 */
 
-int	input_loop(PhoneBook repertoire)
-{
-	(void)repertoire;
-	std::cout << "This is a Phonebook, please type \"ADD\", \"SEARCH\", or \"EXIT\"" << std::endl;
-	std::string	cmd;
-	std::cin>>cmd;
-	if (cmd == "ADD")
-	{
-		std::cout << "i need to add a contact" << std::endl;
-	}
-	else if (cmd == "SEARCH")
-	{
-		std::cout << "i need to search all contacts" << std::endl;
-	}
-	else if (cmd == "EXIT")
-	{
-		return (0);
-	}
-	else
-		std::cout << "NO! BAD USER, BAD!" << std::endl;
-	return (1);
-}
-
 int	main()
 {
-	/*
-	create phonebook, wich will create contacts
-	launch loop of input-output
-	if loop EXIT, then destroy all and exit
-	*/
 	PhoneBook repertoire;
-	int	end;
-	end = 1;
-	while (end)
+	std::string	cmd = "LOL";
+	while (cmd != "EXIT")
 	{
-		end = input_loop(repertoire);
+		std::cout << "This is a Phonebook, please type \"ADD\", \"SEARCH\", or \"EXIT\"" << std::endl << ">";
+		std::cin>>cmd;
+		if (cmd == "ADD")
+		{
+			repertoire.add_contact();
+		}
+		else if (cmd == "SEARCH")
+		{
+			repertoire.search_contact();
+		}
+		else if (cmd != "EXIT")
+			std::cout << "NO! BAD USER, BAD!" << std::endl;
 	}
 	return (0);
 }

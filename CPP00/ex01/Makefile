@@ -25,11 +25,11 @@ _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
 SRCS		= 	main.cpp \
-				# Contact.cpp \
-				Phonebook.cpp
+				Contact.cpp \
+				PhoneBook.cpp
 
-HEADER		= 	Phonebook.hpp \
-				Contact.hpp \
+HEADER		= 	Contact.hpp \
+				PhoneBook.hpp
 
 RM			= rm -rf
 NAME		= Phonebook

@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:59:34 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/20 16:43:37 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:53:56 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,42 @@ parse input here?
 */
 
 //init
-PhoneBook::PhoneBook() contact_count(0)
-{}
+PhoneBook::PhoneBook()
+{
+	contact_count = 0;
+}
 //destr
 PhoneBook::~PhoneBook() {}
 
 void	PhoneBook::add_contact()
 {
-	this->contact_count++;
-	this->contacts[contact_count]::fill_contact;
+	contacts[contact_count % 8].fill_contact();
+	contact_count++;
 }
 
 void	PhoneBook::search_contact()
 {
-	//line for description of each field
-	for (i = 0 ; i < 7)
+	int	limit = 7;
+	if (!contact_count)
 	{
-		std::cout << i << std::endl;
-		Phonebook->contacts[i]::print_search();
+		std::cout << "I have no contact yet, snif" << std::endl;
+		return ;
 	}
-	std::cout << "index to search" << std::endl;//need check for wrong value in cin
-	PhoneBook->contacts[std::cin]::print_full;
+	if (contact_count < 8)
+		limit = contact_count - 1;
+	std::cout << "     index|first name| last name|  nickname" << std::endl;
+	for (int i = 0 ; i <= limit ; i++)
+	{
+		std::cout << std::setw(10) << i;
+		contacts[i].print_search();
+	}
+	std::cout << "index to search" << std::endl << ">";
+	int	index;
+	while(!(std::cin >> index) || index > limit || index < 0)
+	{
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');//should be size max from limits.h
+        std::cout << "Invalid index.  Try again: ";
+    }
+	contacts[index].print_full();
 }
