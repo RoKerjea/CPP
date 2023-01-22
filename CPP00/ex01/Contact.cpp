@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:54:39 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/20 20:52:28 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/22 18:09:46 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ Contact::Contact() {}
 
 Contact::~Contact() {}
 
-/*enum for type of field, in same order as i?*/
 void	Contact::fill_contact()
 {
 	static std::string field_name[5] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
 	for (int i = 0; i < 5; i++)
 	{
 		std::cout << field_name[i] << " = " << std::endl << ">";
-		std::cin >> field[i];
+		std::cin >> field[i];//need to protect against empty field
 	}
 }
 
@@ -46,7 +45,6 @@ std::string format_str(std::string str)
 	{
 		str.resize(9);
 		str.append(".");
-		return str;
 	}
 	return str;
 }

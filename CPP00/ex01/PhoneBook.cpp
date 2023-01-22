@@ -6,32 +6,17 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:59:34 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/20 20:53:56 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/22 18:10:17 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./PhoneBook.hpp"
-/*
-attributs membres => elements d'une struct
-fonctions membres/methodes => fonction qui ne peuvent etre utilises
-				que par cette classe
 
-en C les fonctions sont les "blocs" d'elements de design,
-en C++, c'est les classes
-need:
-create new contact, destroy/replace oldest if more than 8
-get data of all contact for search
-get all data of contact num x
-destroy contact then itself?
-parse input here?
-*/
-
-//init
 PhoneBook::PhoneBook()
 {
 	contact_count = 0;
 }
-//destr
+
 PhoneBook::~PhoneBook() {}
 
 void	PhoneBook::add_contact()
@@ -60,9 +45,13 @@ void	PhoneBook::search_contact()
 	int	index;
 	while(!(std::cin >> index) || index > limit || index < 0)
 	{
+		if (std::cin.eof())
+		{
+			return ;
+		}
         std::cin.clear();
         std::cin.ignore(1000, '\n');//should be size max from limits.h
-        std::cout << "Invalid index.  Try again: ";
+        std::cout << "Invalid index.  Try again: "<< std::endl;
     }
 	contacts[index].print_full();
 }
