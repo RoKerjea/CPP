@@ -24,15 +24,10 @@ _IPURPLE=$'\033[45m
 _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
-SRCS		= 	main.cpp \
-				Zombie.cpp \
-				randomChump.cpp \
-				newZombie.cpp
-
-HEADER		= 	Zombie.hpp
+SRCS		= 	main.cpp
 
 RM			= rm -rf
-NAME		= Zombie
+NAME		= Brain
 CC			= c++ $(CFLAGS)
 
 OBJECTS = $(subst /,/build/,${SRCS:.cpp=.o})

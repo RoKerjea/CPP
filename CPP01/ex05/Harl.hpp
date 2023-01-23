@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:29:58 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/23 15:51:26 by rokerjea         ###   ########.fr       */
+/*   Created: 2023/01/23 18:36:02 by rokerjea          #+#    #+#             */
+/*   Updated: 2023/01/23 18:49:19 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <string>
+#include <iostream>
 
-void	randomChump( std::string name )
+class Harl
 {
-	Zombie stzombie = Zombie(name);
-	stzombie.announce();
-}
+	private:
+		void	debug ( void );
+		void	info ( void );
+		void	warning ( void );
+		void	error ( void );
+	public:
+		void	complain( std::string level );
+};

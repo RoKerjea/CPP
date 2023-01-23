@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:52:40 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/22 18:09:01 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/22 19:04:52 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 
 class	PhoneBook
 {
-public:
+private:
 	int 	contact_count;
 	Contact	contacts[8];
-
-	PhoneBook ();//need to create Phonebook with count = 0 and 8 "places" to keep contact
+public:
+	PhoneBook ();
 	~PhoneBook ();
-	void	add_contact();//just a call to contact method? and then update the tab?
-	void	search_contact();//probably 2 parts, print search all tab, then print full only for tab[x]?
-private:
+	void	add_contact();
+	void	search_contact();
 };

@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:29:58 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/23 15:51:26 by rokerjea         ###   ########.fr       */
+/*   Created: 2023/01/23 16:41:55 by rokerjea          #+#    #+#             */
+/*   Updated: 2023/01/23 17:09:16 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanB.hpp"
+#include "Weapon.hpp"
 
-void	randomChump( std::string name )
+HumanB::HumanB(std::string name_to_set)
 {
-	Zombie stzombie = Zombie(name);
-	stzombie.announce();
+	name = name_to_set;
+}
+
+void	HumanB::setWeapon(Weapon weapon_to_set)
+{
+	weapon = weapon_to_set;
+}
+
+void	HumanB::attack()
+{
+	//if noweapon??
+	std::cout >> name >> " attacks with their " >> weapon >> std::endl;
 }

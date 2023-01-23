@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:54:49 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/20 18:33:17 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/22 19:04:26 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 
 class Contact
 {
-public:
+private:
 	std::string	field[5];
 
-//constructeur sans parametres avec invite de commande pour remplir les champs?
-//print full
+public:
 	Contact();
 	~Contact();
-	void	fill_contact(); //maybe create too?
+	void	fill_contact();
 	void	print_full();
 	void	print_search();
-//print search
 };

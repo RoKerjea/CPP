@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:29:58 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/23 15:51:26 by rokerjea         ###   ########.fr       */
+/*   Created: 2023/01/23 17:01:58 by rokerjea          #+#    #+#             */
+/*   Updated: 2023/01/23 17:03:34 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanA.hpp"
+#include "Weapon.hpp"
 
-void	randomChump( std::string name )
+HumanA::HumanA(std::string name_to_set, Weapon weapon_to_set)
 {
-	Zombie stzombie = Zombie(name);
-	stzombie.announce();
+	name = name_to_set;
+	weapon = weapon_to_set;
 }

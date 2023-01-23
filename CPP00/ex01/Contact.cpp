@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 13:54:39 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/22 18:09:46 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:02:15 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,17 @@ void	Contact::fill_contact()
 	for (int i = 0; i < 5; i++)
 	{
 		std::cout << field_name[i] << " = " << std::endl << ">";
-		std::cin >> field[i];//need to protect against empty field
+		// std::cin >> field[i];//need to protect against empty field
+		while(!(std::cin >> field[i]))
+		{
+			if (std::cin.eof())
+			{
+				return ;
+			}
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');//should be size max from limits.h
+			std::cout << "Invalid string, try again: "<< std::endl;
+		}
 	}
 }
 

@@ -25,11 +25,9 @@ _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
 SRCS		= 	main.cpp \
-				Zombie.cpp \
-				randomChump.cpp \
-				newZombie.cpp
+				Harl.cpp
 
-HEADER		= 	Zombie.hpp
+HEADER		= 	Harl.hpp
 
 RM			= rm -rf
 NAME		= Zombie
