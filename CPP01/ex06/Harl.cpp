@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 18:41:08 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/27 18:52:51 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:18:01 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,20 @@ int	identifiy_cases (std::string level)
 	return (4);
 }
 
-typedef void(Harl::*ptr_func)(void);
-
 void	Harl::complain( std::string level )
 {
-	ptr_func functions[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	int cases = identifiy_cases (level);
-	if (cases <= 3)
-		(this->*functions[cases])();
+	switch (cases)
+	{
+		case (0):
+			debug();
+		case (1):
+			info();
+		case (2):
+			warning();
+		case (3):
+			error();
+		case (4)
+			return ;
+	}
 }
