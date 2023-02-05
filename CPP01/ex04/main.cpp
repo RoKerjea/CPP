@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:37:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/27 17:42:22 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:53:25 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char** av)
 	if (ac != 4)
 		return (2);
 	std::string input = getfile(av[1]);
-	if (input.empty())
+	if (input.empty() || av[2][0] == '\0')
 		return (1);
 	find_and_replace(input, av[2], av[3]);
 

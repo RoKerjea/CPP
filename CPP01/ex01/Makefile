@@ -25,16 +25,13 @@ _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
 SRCS		= 	main.cpp \
-				Weapon.cpp \
-				HumanA.cpp \
-				HumanB.cpp
+				Zombie.cpp \
+				ZombieHorde.cpp 
 
-HEADER		= 	HumanA.hpp \
-				HumanB.hpp \
-				Weapon.hpp
+HEADER		= 	Zombie.hpp
 
 RM			= rm -rf
-NAME		= Violence
+NAME		= Zombie
 CC			= c++ $(CFLAGS)
 
 OBJECTS = $(subst /,/build/,${SRCS:.cpp=.o})

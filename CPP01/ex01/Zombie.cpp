@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 16:02:49 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/23 16:13:25 by rokerjea         ###   ########.fr       */
+/*   Created: 2023/01/23 15:16:14 by rokerjea          #+#    #+#             */
+/*   Updated: 2023/02/05 13:39:33 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie*	zombieHorde( int N, std::string name )
+Zombie::Zombie() {}
+
+Zombie::~Zombie() {}
+
+void	Zombie::announce()
 {
-	Zombie horde[N];
-	for (int i = N; i >= 0; i--)
-	{
-		horde[i] = new Zombie(name);
-	}
-	return (horde[0]);
+	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void	Zombie::baptise(std::string name)
+{
+	_name = name;
 }

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 17:01:58 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/02/05 14:29:44 by rokerjea         ###   ########.fr       */
+/*   Created: 2023/01/23 15:14:18 by rokerjea          #+#    #+#             */
+/*   Updated: 2023/02/05 13:39:46 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "Weapon.hpp"
+#ifndef ZOMBIE_H
+# define ZOMBIE_H
 
-HumanA::HumanA(std::string name_to_set, Weapon &weapon_to_set) : _weapon(weapon_to_set)
-{
-	_name = name_to_set;
-}
+#include <string>
+#include <iostream>
 
-void	HumanA::attack()
+class	Zombie
 {
-	//if noweapon??
-	std::cout << _name << " attacks with their " << _weapon.getType() << std::endl;
-}
+	private:
+		std::string	_name;
+	public:
+		Zombie();
+		~Zombie();
+		void	announce( void );
+		void	baptise(std::string name);
+};
+
+Zombie*	zombieHorde( int N, std::string name );
+
+#endif

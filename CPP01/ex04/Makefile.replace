@@ -4,7 +4,7 @@ _BOLD=$'\033[1m
 _UNDER=$'\033[4m
 _REV=$'\033[7m
 
-# Colors
+# 
 _GREY=$'\033[30m
 _RED=$'\033[31m
 _GREEN=$'\033[32m
@@ -24,22 +24,15 @@ _IPURPLE=$'\033[45m
 _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
-SRCS		= 	main.cpp \
-				Weapon.cpp \
-				HumanA.cpp \
-				HumanB.cpp
-
-HEADER		= 	HumanA.hpp \
-				HumanB.hpp \
-				Weapon.hpp
-
+SRCS		= main.cpp
 RM			= rm -rf
-NAME		= Violence
+NAME		= my_sed
 CC			= c++ $(CFLAGS)
 
 OBJECTS = $(subst /,/build/,${SRCS:.cpp=.o})
 #OBJECTS = ${SRCS:%.c=.build/%.o}
 DEPEND	= ${OBJECTS:.o=.d}
+
 CFLAGS		= -Wall -Werror -Wextra -std=c++98
 
 

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   ZombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 17:01:58 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/02/05 14:29:44 by rokerjea         ###   ########.fr       */
+/*   Created: 2023/01/23 16:02:49 by rokerjea          #+#    #+#             */
+/*   Updated: 2023/02/05 13:45:25 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "Weapon.hpp"
+#include "Zombie.hpp"
 
-HumanA::HumanA(std::string name_to_set, Weapon &weapon_to_set) : _weapon(weapon_to_set)
+Zombie*	zombieHorde( int N, std::string name )
 {
-	_name = name_to_set;
-}
-
-void	HumanA::attack()
-{
-	//if noweapon??
-	std::cout << _name << " attacks with their " << _weapon.getType() << std::endl;
+	Zombie *horde = new Zombie[N];
+	for (int i = N - 1; i >= 0; i--)
+	{
+		horde[i].baptise(name);
+	}
+	return (horde);
 }

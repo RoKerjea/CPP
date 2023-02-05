@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 16:10:59 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/23 16:14:54 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:47:15 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ int	main(void)
 	{
 		horde[i].announce();
 	}
+	delete[] horde;
+
+	num = 12;
+	horde = zombieHorde(num, "John");
 	for (int i = 0; i < num; i++)
 	{
-		delete horde[i];
+		horde[i].announce();
 	}
+	delete[] horde;
+	return (0);
 }
