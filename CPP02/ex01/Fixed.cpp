@@ -17,16 +17,16 @@ Fixed::Fixed(const Fixed& ori)
 	*this = ori;
 }
 
-// Fixed::Fixed(int num)
-// {
-// 	std::cout << "Int constructor called" << std::endl;
-// 	_value = num * 
-// }
+Fixed::Fixed(int num)
+{
+	std::cout << "Int constructor called" << std::endl;
+	_value = num << _rawbits;
+}
 
-Fixed::Fixed(float fnum)
+Fixed::Fixed(const float fnum)
 {
 	std::cout << "Float constructor called" << std::endl;
-	_value = fnum * (1 << _rawbits);
+	_value = roundf(fnum * (1 << _rawbits));
 }
 
 Fixed& Fixed::operator=(const Fixed& ori)
@@ -36,9 +36,9 @@ Fixed& Fixed::operator=(const Fixed& ori)
 	return *this;
 }
 
-ostream& Fixed::operator<<(ostream& out)
+std::ostream& operator<<(std::ostream& out, const Fixed& fxnum)
 {
-	out << toFloat();
+	out << fxnum.toFloat();
 	return out;
 }
 
@@ -54,14 +54,14 @@ void	Fixed::setRawBits(int const raw)
 	_value = raw;
 }
 
-float	Fixed::toFloat()
+float	Fixed::toFloat() const
 {
 	float res;
 	res = (float)_value / (float)(1 << _rawbits);
-	return ()
+	return (res);
 }
 
-// int	Fixed::toInt()
-// {
-
-// }
+int	Fixed::toInt() const
+{
+	return _value >> _rawbits;
+}
