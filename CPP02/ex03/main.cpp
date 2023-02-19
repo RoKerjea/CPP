@@ -1,55 +1,56 @@
 #include <iostream>
 #include "Fixed.hpp"
+#include "Point.hpp"
+
+void	test_bsp(void)
+{
+	Point a(0, 0);
+	Point b(0, 5);
+	Point c(5, 0);
+	Point p(1, 1);
+	if (bsp(a, b, c, p))
+		std::cout << "ca marche?" << std::endl;
+	Point q(5, 5);
+	if (bsp(a, b, c, q))
+		std::cout << "ca marche pas" << std::endl;
+	Point r(1, 0);
+	if (bsp(a, b, c, r))
+		std::cout << "ca marche pas" << std::endl;
+	Point s(0, 1);
+	if (bsp(a, b, c, s))
+		std::cout << "ca marche pas" << std::endl;
+}
 
 int main( void )
 {
-	Fixed a;
-	// Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-	Fixed b( 10 );
-	Fixed c(10);
+	Point a;
+	Point b(4.5, 6.5);
 
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << --a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a-- << std::endl;
-	std::cout << a << std::endl;
+	float	x = a.getFixedX().toFloat();
+	std::cout << x << "\n";
+	x = b.getFixedX().toFloat();
+	std::cout << x << "\n";
+	float	y = b.getFixedY().toFloat();
+	std::cout << y << "\n";
 
-	std::cout << b << std::endl;
+	Point c(b);
+	x = c.getFixedX().toFloat();
+	std::cout << x << "\n";
+	y = c.getFixedY().toFloat();
+	std::cout << y << "\n";
 
-	// std::cout << Fixed::max( a, b ) << std::endl;
-	if (a < b)
-		std::cout << "< work" << std::endl;
-	if (b > a)
-		std::cout << "> work" << std::endl;
-	if (a <= b && b <= c)
-		std::cout << "<= work" << std::endl;
-	if (b >= a && b >= c)
-		std::cout << ">= work" << std::endl;
-	if (b != a)
-		std::cout << "!= work" << std::endl;
-	if (b != c)
-		std::cout << "!= no work" << std::endl;
-	if (b == c)
-		std::cout << "== work" << std::endl;
-	if (b == a)
-		std::cout << "== no work" << std::endl;
+	Point d(4.7, 6.8);
+	Point e;
+	e = d;
+	x = e.getFixedX().toFloat();
+	std::cout << x << "\n";
+	x = d.getFixedX().toFloat();
+	std::cout << x << "\n";
+	y = e.getFixedY().toFloat();
+	std::cout << y << "\n";
+	y = d.getFixedY().toFloat();
+	std::cout << y << "\n";
 
-	std::cout << "addition give " << b + Fixed(5) << std::endl;
-	std::cout << "substraction give " << b - Fixed(5) << std::endl;
-	std::cout << "multiplication give " << b * Fixed(5) << std::endl;
-	std::cout << "division give " << b / Fixed(5) << std::endl;
-	std::cout << "0 division give " << b / Fixed(0) << std::endl;
-
-	std::cout << Fixed::min( a, b ) << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
-
-	Fixed const d( 25 );
-	Fixed const e( 42 );
-	std::cout << Fixed::min( e, d ) << std::endl;
-	std::cout << Fixed::max( d, e ) << std::endl;
+	test_bsp();
 	return 0;
 }

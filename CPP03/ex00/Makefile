@@ -25,15 +25,12 @@ _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
 SRCS		= 	main.cpp \
-				bsp.cpp \
-				Fixed.cpp \
-				Point.cpp
+				ClapTrap.cpp
 
-HEADER		= 	Fixed.hpp \
-				Point.hpp
+HEADER		= 	ClapTrap.hpp \
 
 RM			= rm -rf
-NAME		= point
+NAME		= ClapTrap
 CC			= c++ $(CFLAGS)
 
 OBJECTS = $(subst /,/build/,${SRCS:.cpp=.o})

@@ -27,10 +27,10 @@ class	Fixed
 		bool	operator!=(const Fixed& right) const;
 
 	//OPERATOR MATH
-		Fixed operator+(const Fixed& right);
-		Fixed operator-(const Fixed& right);
-		Fixed operator*(const Fixed& right);
-		Fixed operator/(const Fixed& right);
+		Fixed	operator+(const Fixed& right);
+		Fixed	operator-(const Fixed& right);
+		Fixed	operator*(const Fixed& right);
+		Fixed	operator/(const Fixed& right);
 
 	//OPERATOR INCREMENT/DECREMENT
 		Fixed&	operator++();
@@ -45,11 +45,11 @@ class	Fixed
 		static Fixed	max(const Fixed& left, const Fixed& right);
 
 	//GETTER
-		int	getRawBits( void ) const;
+		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
 
 	//CONVERTER
-		int	toInt() const;
+		int		toInt() const;
 		float	toFloat() const;
 };
 

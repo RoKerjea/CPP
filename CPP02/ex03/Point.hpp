@@ -11,12 +11,15 @@ class	Point
 	public:
 		Point();
 		Point(const float x, const float y);
-		Point(&Point ori);
+		Point(const Point &other);
 		~Point();
 
 		Point& operator=(const Point& ori);
 		Fixed getFixedX(void) const;
 		Fixed getFixedY(void) const;
 };
+
+bool	bsp(Point const a, Point const b, Point const c, Point const point);
+bool	point_is_in_front(Point p, Point a, Point b);
 
 #endif

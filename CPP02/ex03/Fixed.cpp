@@ -138,16 +138,23 @@ Fixed Fixed::operator-(const Fixed& right)
 
 Fixed Fixed::operator*(const Fixed& right)
 {
-	Fixed res(this->toFloat() * right.toFloat());
-	return res;
+	this->_value =
+	((long long)this->_value * (long long)right.getRawBits()) >>
+		this->_mantissize;
+	return *this;
 }
 
 Fixed Fixed::operator/(const Fixed& right)
 {
 	if (right.toFloat() == 0)
+	{
 		std::cout << "!!Division by 0\n";
-	Fixed res(this->toFloat() / right.toFloat());
-	return res;
+		return (Fixed(0));
+	}
+	this->_value =
+	((long long)this->_value << this->_mantissize) /
+	right.getRawBits();
+	return *this;
 }
 
 Fixed&	Fixed::operator++()
