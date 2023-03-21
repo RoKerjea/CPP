@@ -26,7 +26,7 @@ _IWHITE=$'\033[47m
 
 SRCS		= 	main.cpp \
 				Zombie.cpp \
-				ZombieHorde.cpp 
+				zombieHorde.cpp
 
 HEADER		= 	Zombie.hpp
 

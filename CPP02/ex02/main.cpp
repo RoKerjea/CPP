@@ -6,35 +6,43 @@ int main( void )
 	Fixed a;
 	Fixed b( Fixed( 5.05f ) * Fixed( 2 ) );
 	// Fixed b( 10 );
-	Fixed c(10);
+	Fixed c(10.1016f);
 
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << --a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a-- << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "++a = " << ++a << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "a++ = " << a++ << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "--a = " << --a << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "a-- = " << a-- << std::endl;
+	std::cout << "a = " << a << std::endl;
+	std::cout << "b = " << b << std::endl;
 
 	// std::cout << Fixed::max( a, b ) << std::endl;
 	if (a < b)
 		std::cout << "< work" << std::endl;
+	else
+		std::cout << "< no work" << std::endl;
 	if (b > a)
 		std::cout << "> work" << std::endl;
+	else
+		std::cout << "> no work" << std::endl;
 	if (a <= b && b <= c)
 		std::cout << "<= work" << std::endl;
+	else
+		std::cout << "<= no work" << std::endl;
 	if (b >= a && b >= c)
 		std::cout << ">= work" << std::endl;
+	else
+		std::cout << ">= no work" << std::endl;
 	if (b != a)
 		std::cout << "!= work" << std::endl;
-	if (b != c)
+	else
 		std::cout << "!= no work" << std::endl;
 	if (b == c)
 		std::cout << "== work" << std::endl;
-	if (b == a)
+	else
 		std::cout << "== no work" << std::endl;
 
 	std::cout << "addition give " << b + Fixed(5) << std::endl;

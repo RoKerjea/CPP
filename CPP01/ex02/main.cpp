@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 16:15:37 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/23 16:37:43 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:40:03 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	main()
 	std::string brainStr;
 	brainStr = "HI THIS IS BRAIN";
 
-	std::string *stringPTR;
-	stringPTR = &brainStr;
+	std::string *stringPTR = &brainStr;
 
 	std::string &stringREF = brainStr;
 

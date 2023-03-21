@@ -29,12 +29,12 @@ Fixed::Fixed(const float fnum)
 	_value = roundf(fnum * (1 << _rawbits));
 }
 
-// Fixed& Fixed::operator=(const Fixed& ori)
-// {
-// 	std::cout << "Copy assignment operator called" << std::endl;
-// 	this->_value = ori.getRawBits();
-// 	return *this;
-// }
+Fixed& Fixed::operator=(const Fixed& ori)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->_value = ori.getRawBits();
+	return *this;
+}
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fxnum)
 {

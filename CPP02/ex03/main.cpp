@@ -9,16 +9,16 @@ void	test_bsp(void)
 	Point c(5, 0);
 	Point p(1, 1);
 	if (bsp(a, b, c, p))
-		std::cout << "ca marche?" << std::endl;
+		std::cout << "Oui, le point est dans le triangle" << std::endl;
 	Point q(5, 5);
-	if (bsp(a, b, c, q))
-		std::cout << "ca marche pas" << std::endl;
+	if (!bsp(a, b, c, q))
+		std::cout << "Non, le point n'est pas dans le triangle" << std::endl;
 	Point r(1, 0);
-	if (bsp(a, b, c, r))
-		std::cout << "ca marche pas" << std::endl;
+	if (!bsp(a, b, c, r))
+		std::cout << "Non, le point n'est pas dans le triangle" << std::endl;
 	Point s(0, 1);
-	if (bsp(a, b, c, s))
-		std::cout << "ca marche pas" << std::endl;
+	if (!bsp(a, b, c, s))
+		std::cout << "Non, le point n'est pas dans le triangle" << std::endl;
 }
 
 int main( void )
