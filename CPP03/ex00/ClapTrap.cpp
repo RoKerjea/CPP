@@ -30,6 +30,8 @@ ClapTrap::ClapTrap(const ClapTrap& ori)
 ClapTrap&	ClapTrap::operator=(const ClapTrap& ori)
 {
 	this->~ClapTrap();
+	if (this == &ori)
+		return *this;
 	new (this) ClapTrap(ori);
 	return *this;
 }
@@ -65,6 +67,11 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
+	if (hit_point <= 0)
+	{
+		std::cout << "No HP, can't move" << "\n";
+		return ;
+	}
 	if (energy_points <= 0)
 	{
 		std::cout << "No energy, can't move" << "\n";

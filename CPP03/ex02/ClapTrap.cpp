@@ -24,12 +24,14 @@ ClapTrap::ClapTrap(const ClapTrap& ori)
 	hit_point = ori.get_pv();
 	energy_points = ori.get_energy();
 	attack_dmg = ori.get_damage();
-	std::cout << "Copying Claptrap " << name << " !" << "\n";
+	std::cout << "Building Claptrap " << name << " !" << "\n";
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& ori)
 {
 	this->~ClapTrap();
+	if (this == &ori)
+		return *this;
 	new (this) ClapTrap(ori);
 	return *this;
 }
@@ -60,11 +62,16 @@ void	ClapTrap::takeDamage(unsigned int amount)
 {
 	hit_point -= amount;
 	std::cout << "ClapTrap " << name << " takes "<< amount << " of damages, hp left = ";
-	std::cout << hit_point << std::endl;
+	std::cout << hit_point << "\n";
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
+	if (hit_point <= 0)
+	{
+		std::cout << "No HP, can't move" << "\n";
+		return ;
+	}
 	if (energy_points <= 0)
 	{
 		std::cout << "No energy, can't move" << "\n";
@@ -73,8 +80,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	energy_points--;
 	hit_point += amount;
 	std::cout << "ClapTrap " << name << " heal for "<< amount << " of damages, hp left = ";
-	std::cout << hit_point;
-	std::cout << " energy left : " << energy_points << std::endl;
+	std::cout << hit_point << "\n";
 }
 
 std::string ClapTrap::get_name() const

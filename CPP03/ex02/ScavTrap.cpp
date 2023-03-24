@@ -5,7 +5,7 @@ ScavTrap::ScavTrap() : ClapTrap()
 	hit_point = 100;
 	energy_points = 50;
 	attack_dmg = 20;
-	std::cout << "Upgarding " << name << " to ScavTrap !" << "\n";
+	std::cout << "Upgrading " << name << " to ScavTrap !" << "\n";
 }
 
 ScavTrap::ScavTrap(std::string name_to_set) : ClapTrap(name_to_set)
@@ -13,7 +13,7 @@ ScavTrap::ScavTrap(std::string name_to_set) : ClapTrap(name_to_set)
 	hit_point = 100;
 	energy_points = 50;
 	attack_dmg = 20;
-	std::cout << "Upgarding " << name << " to ScavTrap !" << "\n";
+	std::cout << "Upgrading " << name << " to ScavTrap !" << "\n";
 }
 
 ScavTrap::~ScavTrap()
@@ -24,6 +24,15 @@ ScavTrap::~ScavTrap()
 ScavTrap::ScavTrap(const ScavTrap& ori) : ClapTrap(ori)
 {
 	std::cout << "Copying ScavTrap " << name << " !" << "\n";
+}
+
+ScavTrap&	ScavTrap::operator=(const ScavTrap& ori)
+{
+	this->~ScavTrap();
+	if (this == &ori)
+		return *this;
+	new (this) ScavTrap(ori);
+	return *this;
 }
 
 void	ScavTrap::attack(const std::string& target)
@@ -57,5 +66,5 @@ void	ScavTrap::guardGate()
 	}
 	energy_points -= 10;
 	std::cout << "ScavTrap " << name << " entered Gate Keeper mode!";
-	std::cout << " energy left : " << energy_points << std::endl;
+	std::cout << "energy left : " << energy_points << std::endl;
 }

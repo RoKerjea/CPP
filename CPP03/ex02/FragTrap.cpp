@@ -26,22 +26,14 @@ FragTrap::FragTrap(const FragTrap& ori) : ClapTrap(ori)
 	std::cout << "Copying FragTrap " << name << " !" << "\n";
 }
 
-// void	FragTrap::attack(const std::string& target)
-// {
-// 	if (hit_point <= 0)
-// 	{
-// 		std::cout << "No HP, can't move" << "\n";
-// 		return ;
-// 	}
-// 	if (energy_points <= 0)
-// 	{
-// 		std::cout << "No energy, can't move" << "\n";
-// 		return ;
-// 	}
-// 	energy_points --;
-// 	std::cout << "FragTrap " << name << " is gonna frag "<< target << ", for ";
-// 	std::cout << attack_dmg << " points of damage!" << "\n";
-// }
+FragTrap&	FragTrap::operator=(const FragTrap& ori)
+{
+	this->~FragTrap();
+	if (this == &ori)
+		return *this;
+	new (this) FragTrap(ori);
+	return *this;
+}
 
 void	FragTrap::highFivesGuys(void)
 {
