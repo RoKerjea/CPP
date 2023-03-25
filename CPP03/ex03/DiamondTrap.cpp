@@ -1,10 +1,13 @@
 #include "DiamondTrap.hpp"
 
-// DiamondTrap::DiamondTrap() : ClapTrap()
-// {
-
-// 	std::cout << "Crystalizing " << name << " into a DiamondTrap !" << "\n";
-// }
+DiamondTrap::DiamondTrap() :
+	ClapTrap("noname_clap_name"),
+	FragTrap("noname"),
+	ScavTrap("noname"),
+	name("noname")
+{
+	std::cout << "Crystalizing " << name << " to DiamondTrap !" << "\n";
+}
 
 DiamondTrap::DiamondTrap(std::string name_to_set) :
 	ClapTrap(name_to_set + "_clap_name"),
@@ -27,14 +30,22 @@ DiamondTrap::DiamondTrap(const DiamondTrap& ori) : ClapTrap(ori)
 
 DiamondTrap&	DiamondTrap::operator=(const DiamondTrap& ori)
 {
-	this->~DiamondTrap();
 	if (this == &ori)
 		return *this;
+	this->~DiamondTrap();
 	new (this) DiamondTrap(ori);
 	return *this;
 }
 
 void	DiamondTrap::whoAmI(void)
 {
-	//
+	std::cout << "HeLloO, I'm \"" << name << "\", AlsO KnoWN aS \"" << ClapTrap::name << "\"\n";
+}
+
+void	DiamondTrap::self_diagnostic()
+{
+	whoAmI();
+	std::cout << "HP = " << hit_point << "\n";
+	std::cout << "MP = " << energy_points << "\n";
+	std::cout << "ATT = " << attack_dmg << "\n";
 }

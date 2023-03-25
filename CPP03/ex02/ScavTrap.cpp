@@ -1,18 +1,14 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap("noname", 100, 50, 20)
 {
-	hit_point = 100;
 	energy_points = 50;
-	attack_dmg = 20;
 	std::cout << "Upgrading " << name << " to ScavTrap !" << "\n";
 }
 
-ScavTrap::ScavTrap(std::string name_to_set) : ClapTrap(name_to_set)
+ScavTrap::ScavTrap(std::string name_to_set) : ClapTrap(name_to_set, 100, 50, 20)
 {
-	hit_point = 100;
 	energy_points = 50;
-	attack_dmg = 20;
 	std::cout << "Upgrading " << name << " to ScavTrap !" << "\n";
 }
 
@@ -37,12 +33,12 @@ ScavTrap&	ScavTrap::operator=(const ScavTrap& ori)
 
 void	ScavTrap::attack(const std::string& target)
 {
-	if (hit_point <= 0)
+	if (hit_point == 0)
 	{
 		std::cout << "No HP, can't move" << "\n";
 		return ;
 	}
-	if (energy_points <= 0)
+	if (energy_points == 0)
 	{
 		std::cout << "No energy, can't move" << "\n";
 		return ;
@@ -54,17 +50,17 @@ void	ScavTrap::attack(const std::string& target)
 
 void	ScavTrap::guardGate()
 {
-	if (hit_point <= 0)
+	if (hit_point == 0)
 	{
 		std::cout << "No HP, can't move" << "\n";
 		return ;
 	}
-	if (energy_points <= 0)
+	if (energy_points < 10)
 	{
-		std::cout << "No energy, can't move" << "\n";
+		std::cout << "Not enough energy, can't move" << "\n";
 		return ;
 	}
 	energy_points -= 10;
 	std::cout << "ScavTrap " << name << " entered Gate Keeper mode!";
-	std::cout << "energy left : " << energy_points << std::endl;
+	std::cout << " Energy left : " << energy_points << std::endl;
 }

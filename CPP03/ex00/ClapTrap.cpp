@@ -18,6 +18,15 @@ ClapTrap::ClapTrap(std::string name_to_set)
 	std::cout << "Building Claptrap " << name << " !" << "\n";
 }
 
+ClapTrap::ClapTrap(std::string name_to_set, unsigned int hp, unsigned int ep, unsigned int attack)
+{
+	name = name_to_set;
+	hit_point = hp;
+	energy_points = ep;
+	attack_dmg = attack;
+	std::cout << "Building Claptrap " << name << " !" << "\n";
+}
+
 ClapTrap::ClapTrap(const ClapTrap& ori)
 {
 	name = ori.get_name();
@@ -29,9 +38,9 @@ ClapTrap::ClapTrap(const ClapTrap& ori)
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& ori)
 {
-	this->~ClapTrap();
 	if (this == &ori)
 		return *this;
+	this->~ClapTrap();
 	new (this) ClapTrap(ori);
 	return *this;
 }
@@ -43,12 +52,12 @@ ClapTrap::~ClapTrap()
 
 void	ClapTrap::attack(const std::string& target)
 {
-	if (hit_point <= 0)
+	if (hit_point == 0)
 	{
 		std::cout << "No HP, can't move" << "\n";
 		return ;
 	}
-	if (energy_points <= 0)
+	if (energy_points == 0)
 	{
 		std::cout << "No energy, can't move" << "\n";
 		return ;
@@ -60,25 +69,32 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	hit_point -= amount;
+	//need check if negatif
+	if (amount > hit_point)
+		hit_point -= hit_point;
+	else
+		hit_point -= amount;
 	std::cout << "ClapTrap " << name << " takes "<< amount << " of damages, hp left = ";
 	std::cout << hit_point << "\n";
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (hit_point <= 0)
+	if (hit_point == 0)
 	{
 		std::cout << "No HP, can't move" << "\n";
 		return ;
 	}
-	if (energy_points <= 0)
+	if (energy_points == 0)
 	{
 		std::cout << "No energy, can't move" << "\n";
 		return ;
 	}
 	energy_points--;
-	hit_point += amount;
+	if (4294967295 - amount < hit_point)
+		hit_point = 4294967295;
+	else
+		hit_point += amount;
 	std::cout << "ClapTrap " << name << " heal for "<< amount << " of damages, hp left = ";
 	std::cout << hit_point << "\n";
 }
@@ -88,17 +104,17 @@ std::string ClapTrap::get_name() const
 	return (name);
 }
 
-int	ClapTrap::get_pv() const
+unsigned int	ClapTrap::get_pv() const
 {
 	return (hit_point);
 }
 
-int	ClapTrap::get_energy() const
+unsigned int	ClapTrap::get_energy() const
 {
 	return (energy_points);
 }
 
-int	ClapTrap::get_damage() const
+unsigned int	ClapTrap::get_damage() const
 {
 	return (attack_dmg);
 }

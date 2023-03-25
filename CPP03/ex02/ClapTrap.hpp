@@ -8,14 +8,15 @@ class ClapTrap
 	protected:
 
 	std::string name;
-	int	hit_point;
-	int	energy_points;
-	int	attack_dmg;
+	unsigned int	hit_point;
+	unsigned int	energy_points;
+	unsigned int	attack_dmg;
 
 	public:
 
 	ClapTrap();
 	ClapTrap(std::string name);
+	ClapTrap(std::string name_to_set, unsigned int hp, unsigned int ep, unsigned int attack);
 	ClapTrap(const ClapTrap &ori);
 	ClapTrap&	operator=(const ClapTrap &ori);
 	~ClapTrap();
@@ -25,9 +26,9 @@ class ClapTrap
 	void	beRepaired(unsigned int amount);
 
 	std::string	get_name(void) const;
-	int	get_pv(void) const;
-	int	get_energy(void) const;
-	int	get_damage(void) const;
+	unsigned int	get_pv(void) const;
+	unsigned int	get_energy(void) const;
+	unsigned int	get_damage(void) const;
 };
 
 #endif

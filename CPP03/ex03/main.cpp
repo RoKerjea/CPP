@@ -1,5 +1,6 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int	main(void)
 {
@@ -22,5 +23,21 @@ int	main(void)
 	frag.takeDamage(5);
 	frag.beRepaired(10);
 	frag.highFivesGuys();
+	}
+	{
+	DiamondTrap gem("gem");
+	gem.self_diagnostic();
+	gem.takeDamage(5);
+	gem.beRepaired(10);
+	gem.attack("serge");
+	gem.whoAmI();
+	}
+	{
+	DiamondTrap quartz;
+	quartz.self_diagnostic();
+	quartz.takeDamage(5);
+	quartz.beRepaired(10);
+	quartz.attack("serge");
+	quartz.whoAmI();
 	}
 }

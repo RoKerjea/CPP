@@ -1,7 +1,7 @@
 #ifndef DIAMONDTRAP_HPP
 # define DIAMONDTRAP_HPP
 
-#include "Fragtrap.hpp"
+#include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
 class DiamondTrap : public FragTrap, public ScavTrap
@@ -9,7 +9,6 @@ class DiamondTrap : public FragTrap, public ScavTrap
 	private:
 
 	std::string name;
-	// ClapTrap::name;
 
 	public:
 	DiamondTrap();
@@ -19,7 +18,9 @@ class DiamondTrap : public FragTrap, public ScavTrap
 	~DiamondTrap();
 
 	void	whoAmI();
+	void	self_diagnostic();
 	//"using" to define attack method to herit from Scavtrap
+	using ScavTrap::attack;
 };
 
 #endif
