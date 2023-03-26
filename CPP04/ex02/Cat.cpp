@@ -3,16 +3,19 @@
 Cat::Cat()
 {
 	type = "Cat";
+	brain = new Brain();
 	std::cout << "It's a Cat\n";
 }
 
 Cat::Cat(const Cat &ori)
 {
+	brain = ori.brain
 	std::cout << "There's more Cats now\n";
 }
 
 ~Cat::Cat()
 {
+	delete brain;
 	std::cout << "Oh no, the kitty!\n";
 }
 
@@ -22,6 +25,7 @@ Cat& operator=(const Cat &ori)
 		return *this;
 	this->~Cat();
 	new (this) Cat(ori);
+	brain = ori.brain
 	return *this;
 }
 

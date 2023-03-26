@@ -12,3 +12,7 @@ meta->makeSound();
 
 return 0;
 }
+
+//only "concept" particular in this exercise
+//is the virtual keyword for makeSound() method
+//to add to Animal and remove from WrongAnimal

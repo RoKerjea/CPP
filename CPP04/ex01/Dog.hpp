@@ -6,6 +6,7 @@
 class Dog: virtual public Animal
 {
 	private:
+	*Brain _brain;
 
 	public:
 	Dog();
