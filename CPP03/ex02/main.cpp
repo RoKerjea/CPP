@@ -18,7 +18,7 @@ int	main(void)
 	}
 	{
 	FragTrap frag("Fragman");
-	// frag.attack("bob");
+	frag.attack("bob");
 	frag.takeDamage(5);
 	frag.beRepaired(10);
 	frag.highFivesGuys();
