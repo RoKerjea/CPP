@@ -2,6 +2,8 @@
 
 Brain::Brain()
 {
+	for (int i = 0; i < 100; i++)
+		ideas [i] = "*nothing*";
 	std::cout << "Brain Developped\n";
 }
 
@@ -13,14 +15,13 @@ Brain::Brain(const Brain& ori)
 
 Brain&	Brain::operator=(const	Brain& ori)
 {
-	if (this == &ori)
-		return *this;
-	for (int i = 0; i < 100; i++)
-		this->ideas[i] = ori.ideas[i];
+	if (this != &ori)
+		for (int i = 0; i < 100; i++)
+			this->ideas[i] = ori.ideas[i];
 	return *this;
 }
 
 Brain::~Brain()
 {
-	std::cout << "So Long!\n";
+	std::cout << "So Long!" << std::endl;
 }

@@ -19,10 +19,8 @@ Cat::~Cat()
 
 Cat& Cat::operator=(const Cat &ori)
 {
-	if (this == &ori)
-		return *this;
-	this->Cat::~Cat();
-	new (this) Cat(ori);
+	if (this != &ori)
+		type = ori.getType();
 	return *this;
 }
 

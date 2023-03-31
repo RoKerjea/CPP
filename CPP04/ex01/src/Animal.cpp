@@ -14,10 +14,8 @@ Animal::Animal(const Animal& ori)
 
 Animal&	Animal::operator=(const	Animal& ori)
 {
-	if (this == &ori)
-		return *this;
-	this->Animal::~Animal();
-	new (this) Animal(ori);
+	if (this != &ori)
+		type = ori.getType ();
 	return *this;
 }
 

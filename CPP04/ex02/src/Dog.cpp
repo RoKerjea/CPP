@@ -3,30 +3,29 @@
 Dog::Dog()
 {
 	type = "Dog";
-	brain = new Brain();
+	brain = new Brain;
 	std::cout << "Puppy!\n";
 }
 
-Dog::Dog(const Dog &ori)
+Dog::Dog(const Dog &ori) : Animal(ori)
 {
-	type = ori.getType();
-	brain = ori.brain;
+	brain = new Brain(*(ori.brain));
 	std::cout << "There's more Dogs now\n";
 }
 
 Dog::~Dog()
 {
-	delete brain;
 	std::cout << "It's a dog's life you know!\n";
+	delete brain;
 }
 
 Dog& Dog::operator=(const Dog &ori)
 {
-	if (this == &ori)
-		return *this;
-	this->~Dog();
-	new (this) Dog(ori);
-	brain = ori.brain;
+	if (this != &ori)
+	{
+		type = ori.getType();
+		(*brain) = *(ori.brain);
+	}
 	return *this;
 }
 

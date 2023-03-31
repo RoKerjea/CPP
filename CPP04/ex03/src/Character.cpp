@@ -17,7 +17,6 @@ Character::Character(std::string name)
 Character::Character(const Character& ori)
 {
 	_name = ori.getName();
-	//need copy of bag in current state
 	for (int i = 0; i < 4; i++)
 	{
 		if (ori.bag[i])
@@ -46,7 +45,6 @@ Character& Character::operator=(const Character& ori)
 
 Character::~Character()
 {
-	//need delete content of bag
 	for (int i = 0; i < 4; i++)
 	{
 		if (bag[i])
@@ -61,28 +59,37 @@ std::string const & Character::getName() const
 
 void	Character::equip(AMateria* m)
 {
-	//equip given materia in first open slot
-	//if no slot open, no action taken
 	for (int i = 0; i < 4; i++)
 	{
-		if (!bag[i])
+		if (!bag[i] && m)
 		{
+			std::cout << _name << " equipped " << m->getType() << " in slot " << i << std::endl;
 			bag[i] = m;
 			return;
 		}
 	}
+	std::cout << _name << " can't equip that\n";
 	return;
 }
 
 void	Character::unequip(int idx)
 {
-	//unequip from selected slot, but not deleted
 	if (idx >= 0 && idx <= 3 && bag[idx])
+	{
+		std::cout << _name << " unequipped " << bag[idx]->getType() << " in slot " << idx << std::endl;
 		bag[idx] = NULL;
+	}
+	else
+		std::cout << _name << " can't unequip that\n";
 }
 
 void	Character::use(int idx, ICharacter& target)
 {
 	if (idx >= 0 && idx <= 3 && bag[idx])
+	{
+		std::cout << _name;
 		bag[idx]->use(target);
+	}
+	else
+		std::cout << _name << " can't use that\n";
 }

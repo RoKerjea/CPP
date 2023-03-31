@@ -3,14 +3,13 @@
 Cat::Cat()
 {
 	type = "Cat";
-	brain = new Brain();
+	brain = new Brain;
 	std::cout << "It's a Cat\n";
 }
 
-Cat::Cat(const Cat &ori)
+Cat::Cat(const Cat &ori) : Animal(ori)
 {
-	type = ori.getType();
-	brain = ori.brain;
+	brain = new Brain(*(ori.brain));
 	std::cout << "There's more Cats now\n";
 }
 
@@ -22,11 +21,11 @@ Cat::~Cat()
 
 Cat& Cat::operator=(const Cat &ori)
 {
-	if (this == &ori)
-		return *this;
-	this->~Cat();
-	new (this) Cat(ori);
-	brain = ori.brain;
+	if (this != &ori)
+	{
+		type = ori.getType();
+		(*brain) = *(ori.brain);
+	}
 	return *this;
 }
 

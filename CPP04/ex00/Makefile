@@ -45,7 +45,7 @@ CC			= c++ $(CFLAGS)
 
 OBJECTS		= $(subst /,/build/,${SRCS:.cpp=.o})
 DEPEND		= ${OBJECTS:.o=.d}
-CFLAGS		= -Wall -Werror -Wextra -std=c++98
+CFLAGS		= -Wall -Werror -Wextra -g3 -std=c++98
 
 
 all:	$(NAME)
