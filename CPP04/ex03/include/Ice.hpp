@@ -5,6 +5,7 @@
 
 class Ice : virtual public AMateria
 {
+	public :
 	Ice();
 	Ice(const Ice& ori);
 	~Ice();
@@ -13,3 +14,5 @@ class Ice : virtual public AMateria
 	Ice* clone() const;
 	void use(ICharacter& target);
 };
+
+#endif

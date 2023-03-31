@@ -3,8 +3,9 @@
 
 #include "AMateria.hpp"
 
-class Cure : virtual public AMateria
+class Cure : public AMateria
 {
+	public :
 	Cure();
 	Cure(const Cure& ori);
 	~Cure();
@@ -13,3 +14,5 @@ class Cure : virtual public AMateria
 	Cure* clone() const;
 	void use(ICharacter& target);
 };
+
+#endif

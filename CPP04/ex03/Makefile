@@ -29,14 +29,16 @@ SRCS		= 	${addprefix src/, \
 				Character.cpp \
 				Cure.cpp \
 				Ice.cpp \
-				Materia.cpp \
+				AMateria.cpp \
 				MateriaSource.cpp}
 
 HEADER		= 	${addprefix include/, \
 				Character.hpp \
+				ICharacter.hpp \
 				Cure.hpp \
 				Ice.hpp \
-				Materia.hpp \
+				AMateria.hpp \
+				IMateriaSource.hpp \
 				MateriaSource.hpp}
 
 RM			= rm -rf
@@ -45,7 +47,7 @@ CC			= c++ $(CFLAGS)
 
 OBJECTS		= $(subst /,/build/,${SRCS:.cpp=.o})
 DEPEND		= ${OBJECTS:.o=.d}
-CFLAGS		= -Wall -Werror -Wextra -std=c++98
+CFLAGS		= -Wall -Werror -Wextra -g3 -std=c++98
 
 
 all:	$(NAME)

@@ -1,6 +1,6 @@
 #include"Ice.hpp"
 
-Ice::Ice() : AMateria("Ice") {}
+Ice::Ice() : AMateria("ice") {}
 
 Ice::~Ice() {}
 
@@ -9,19 +9,16 @@ Ice::Ice(const Ice& ori)
 	_type = ori.getType();
 }
 
-Ice::Ice& operator=(const Ice& ori)
+Ice& Ice::operator=(const Ice& ori)
 {
-	if (this == &ori)
-		return *this;
-	this->_type = ori.getType();
+	if (this != &ori)
+		_type = ori.getType();
 	return *this;
 }
 
-Ice::Ice* clone()
+Ice* Ice::clone() const
 {
-	Ice*	res;
-	res = new Ice();
-	return (res);
+	return new Ice();
 }
 
 void	Ice::use(ICharacter& target)

@@ -1,13 +1,13 @@
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
-#include "ICharacter.hpp"
+# include "ICharacter.hpp"
 
-class Character : virtual ICharacter
+class Character : public ICharacter
 {
 	private:
-	std::string _name;
-	AMateria*	bag[4];
+		std::string _name;
+		AMateria*	bag[4];
 
 	public:
 		Character();

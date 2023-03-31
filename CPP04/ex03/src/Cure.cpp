@@ -1,6 +1,6 @@
 #include"Cure.hpp"
 
-Cure::Cure() : AMateria("Cure") {}
+Cure::Cure() : AMateria("cure") {}
 
 Cure::~Cure() {}
 
@@ -9,15 +9,14 @@ Cure::Cure(const Cure& ori)
 	_type = ori.getType();
 }
 
-Cure::Cure& operator=(const Cure& ori)
+Cure& Cure::operator=(const Cure& ori)
 {
-	if (this == &ori)
-		return *this;
-	this->_type = ori.getType();
+	if (this != &ori)
+		_type = ori.getType();
 	return *this;
 }
 
-Cure::Cure* clone()
+Cure* Cure::clone() const
 {
 	Cure*	res;
 	res = new Cure();
