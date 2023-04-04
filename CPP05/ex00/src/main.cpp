@@ -2,7 +2,14 @@
 
 int	main(void)
 {
-	Bureaucrat bob = Bureaucrat("bob", 20);
+	try
+	{
+		Bureaucrat bob = Bureaucrat("bob", 20);
+	}
+	catch(int status_num)
+	{
+		std::cout << "error num " << status_num << std::endl;
+	}
 	std::cout << "voici " << bob << "\n";
 	return (0);
 }
