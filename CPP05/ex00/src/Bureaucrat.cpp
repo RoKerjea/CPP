@@ -56,7 +56,7 @@ int	Bureaucrat::GradeTooLowException()
 	return (2);
 }
 
-unsigned char	Bureaucrat::getGrade() const
+int	Bureaucrat::getGrade() const
 {
 	return (_grade);
 }
@@ -68,6 +68,6 @@ std::string Bureaucrat::getName() const
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat &target)
 {
-	out << target.getName() << ", bureaucrat grade " << (int)target.getGrade();
+	out << target.getName() << ", bureaucrat grade " << target.getGrade();
 	return out;
 }

@@ -9,17 +9,17 @@ class Bureaucrat
 {
 	private:
 		const std::string	_name;
-		unsigned char	_grade;
+		int	_grade;
 	public:
 		Bureaucrat();
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &ori);
 		// Bureaucrat& operator=(const Bureaucrat &ori);
 
-		Bureaucrat(std::string name, unsigned char grade);
+		Bureaucrat(std::string name, int grade);
 
 		std::string	getName() const;
-		unsigned char	getGrade() const;
+		int	getGrade() const;
 
 		void	promote();
 		void	demote();
