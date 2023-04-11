@@ -1,5 +1,8 @@
-#ifndef FORM_HPP
-# define FORM_HPP
+#pragma once
+
+#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -8,6 +11,8 @@ class Form
 		bool	signature;
 		const int _signature_grade;
 		const int _execute_grade;
+
+		void	checkgrade();
 	public:
 		//every constructor
 		Form();
@@ -16,20 +21,29 @@ class Form
 		~Form();
 		Form& operator=(const Form &ori);
 
+		//setter
 		void	beSigned(Bureaucrat signatory);
 
-		std::string	getName() const;
+		//getter
+		std::string const getName() const;
 		bool	getSigned() const;
 		int	getSignatureGrade() const;
 		int	getExecuteGrade() const;
 
-		int	GradeTooHighException();
-		int	GradeTooLowException();
+		//exceptions
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 };
 
 std::ostream& operator<<(std::ostream& out, const Form &target);
-
-#endif
 
 //Notes:
 //Form use a Bureaucrat to be signed, bureaucrate internal method is used to check

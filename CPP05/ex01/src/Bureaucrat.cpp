@@ -62,6 +62,21 @@ std::string Bureaucrat::getName() const
 	return (_name);
 }
 
+bool	Bureaucrat::signForm(Form formtosign)
+{
+	if (getGrade() <= formtosign.getSignatureGrade())
+	{
+		std::cout << getName() << " signed " << formtosign.getName() << "\n";
+		return (0);
+	}
+	else
+	{
+		std::cout << getName() << " couldn't sign " << formtosign.getName() << " because ";
+		std::cout << "Grade to low to sign" << "\n";
+	}
+	return (1);
+}
+
 std::ostream& operator<<(std::ostream& out, const Bureaucrat &target)
 {
 	out << target.getName() << ", bureaucrat grade " << target.getGrade();

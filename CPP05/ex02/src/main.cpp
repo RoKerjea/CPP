@@ -1,18 +1,5 @@
 #include "Bureaucrat.hpp"
-
-// int	main(void)
-// {
-// 	try
-// 	{
-// 		Bureaucrat bob = Bureaucrat("bob", 160);
-// 		std::cout << "voici " << bob << "\n";
-// 	}
-// 	catch(std::exception &e)
-// 	{
-// 		std::cout << "pb : " << e.what() << "\n";
-// 	}
-// 	return (0);
-// }
+#include "AForm.hpp"
 
 #define RESET "\e[0m"
 #define RED "\e[0;31m"
@@ -24,6 +11,9 @@
 
 int main()
 {
+
+	std::cout << GREEN << "//----------   TEST DES BUREAUCRATES DE L'EX00   ----------//" << RESET << std::endl;
+
 	{
 		std::cout << RED << "Test des constructeurs (default, copy, string)" << RESET << std::endl;	
 		try
@@ -123,6 +113,84 @@ int main()
 			std::cout << bureaucrat1 << std::endl;
 		}
 		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+
+	std::cout << GREEN << "//----------   TEST DES AFORMS + BUREAUCRATES   ----------//" << RESET << std::endl;
+
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Test AForm sign grade 150, exec grade 1 (normal Aform)" << RESET << std::endl;
+		try
+		{
+			AForm a("Siret", 150, 1);
+			std::cout << a << std::endl;
+		}
+		catch(std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Test AForm sign grade 150, exec grade 0 (limite haute exec grade) " << RESET << std::endl;
+		try
+		{
+			AForm a("kbis", 150, 0);
+			std::cout << a << std::endl;
+		}
+		catch(std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Test AForm sign grade 151, exec grade 1 (limite basse sign grade)" << RESET << std::endl;
+		try
+		{
+			AForm a("2032", 151, 1);
+			std::cout << a << std::endl;
+		}
+		catch(std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Test AForm sign grade 150, exec grade 1, and bureaucrat 150 signs it " << RESET << std::endl;
+		try
+		{
+			AForm a("LMNP", 150, 1);
+			std::cout << CYAN << a << RESET << std::endl;
+			Bureaucrat b("Expert Comptable", 150);
+			std::cout << BLUE << b << RESET << std::endl;
+			// b.signAForm(a);
+			a.beSigned(b);
+			std::cout << CYAN << a << RESET << std::endl;
+		}
+		catch(std::exception & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	{
+		std::cout << std::endl;
+		std::cout << RED << "Test AForm sign grade 149, exec grade 1, and bureaucrat 150 signs it " << RESET << std::endl;
+		try
+		{
+			AForm a("TaxeFonciere", 149, 1);
+			std::cout << CYAN << a << RESET << std::endl;
+			Bureaucrat b("Controleur des Impots", 150);
+			std::cout << BLUE << b << RESET << std::endl;
+			// b.signAForm(a);
+			a.beSigned(b);
+			std::cout << CYAN << a << RESET << std::endl;
+		}
+		catch(std::exception & e)
 		{
 			std::cout << e.what() << std::endl;
 		}

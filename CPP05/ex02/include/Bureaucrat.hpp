@@ -1,10 +1,11 @@
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
 
-class
+#include "AForm.hpp"
+
+class AForm;
 
 class Bureaucrat
 {
@@ -24,6 +25,8 @@ class Bureaucrat
 		//setter
 		void	promote();
 		void	demote();
+		//methods
+		bool	signForm(AForm formtosign);
 	//exceptions
 	class GradeTooHighException : public std::exception{
 		public :
@@ -36,5 +39,3 @@ class Bureaucrat
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat &target);
-
-#endif
