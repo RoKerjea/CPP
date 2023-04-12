@@ -1,14 +1,21 @@
 #pragma once
 
-#include "Aform.hpp"
+#include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-class Aform;
+class AForm;
 
 class Intern
 {
+	private:
+		int	identify_cases(std::string typetocrate);
+
+		AForm*	shrubbery (std::string target);
+		AForm*	robotomy (std::string target);
+		AForm*	pardon (std::string target);
+
 	public:
 		//constructors
 		Intern();
@@ -16,5 +23,5 @@ class Intern
 		~Intern();
 		Intern& operator=(const Intern &ori);
 		//actions
-		Aform* makeForm(std::string type, std::string target);
+		AForm* makeForm(std::string type, std::string target);
 };
