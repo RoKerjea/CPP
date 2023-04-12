@@ -26,6 +26,7 @@ _IWHITE=$'\033[47m
 
 SRCS		= 	${addprefix src/, \
 				main.cpp \
+				Intern.cpp \
 				PresidentialPardonForm.cpp \
 				RobotomyRequestForm.cpp \
 				ShrubberyCreationForm.cpp \
@@ -33,6 +34,7 @@ SRCS		= 	${addprefix src/, \
 				Bureaucrat.cpp}
 
 HEADER		= 	${addprefix include/, \
+				Intern.hpp \
 				AForm.hpp \
 				PresidentialPardonForm.hpp \
 				RobotomyRequestForm.hpp \
@@ -40,7 +42,7 @@ HEADER		= 	${addprefix include/, \
 				Bureaucrat.hpp}
 
 RM			= rm -rf
-NAME		= Abstract_Form
+NAME		= Intern
 CC			= c++ $(CFLAGS)
 
 OBJECTS		= $(subst /,/build/,${SRCS:.cpp=.o})

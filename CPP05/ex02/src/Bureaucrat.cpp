@@ -62,7 +62,7 @@ std::string Bureaucrat::getName() const
 	return (_name);
 }
 
-bool	Bureaucrat::signForm(AForm formtosign)
+bool	Bureaucrat::signForm(AForm const & formtosign) const
 {
 	if (getGrade() <= formtosign.getSignatureGrade())
 	{
@@ -72,7 +72,22 @@ bool	Bureaucrat::signForm(AForm formtosign)
 	else
 	{
 		std::cout << getName() << " couldn't sign " << formtosign.getName() << " because ";
-		std::cout << "Grade to low to sign" << "\n";
+		std::cout << "Grade too low to sign" << "\n";
+	}
+	return (1);
+}
+
+bool	Bureaucrat::executeForm(AForm const & form) const
+{
+	if (getGrade() <= form.getExecuteGrade())
+	{
+		std::cout << getName() << " executed " << form.getName() << "\n";
+		return (0);
+	}
+	else
+	{
+		std::cout << getName() << " couldn't execute " << form.getName() << " because ";
+		std::cout << "Grade too low to execute" << "\n";
 	}
 	return (1);
 }

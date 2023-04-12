@@ -1,16 +1,16 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(): AForm(Shrubbery, 145, 137)
+RobotomyRequestForm::RobotomyRequestForm(): AForm("Robotomy", 72, 45)
 {
 	_target = "NoName";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm(Shrubbery, 145, 137)
+RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("Robotomy", 72, 45)
 {
 	_target = target;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ori) : AForm(Shrubbery, 145, 137)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ori) : AForm("Robotomy", 72, 45)
 {
 	_target = ori.getTarget();
 	signature = ori.getSigned();
@@ -18,19 +18,23 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ori) : AForm
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-RobotomyRequestForm::RobotomyRequestForm& operator=(const RobotomyRequestForm &ori)
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &ori)
 {
-	this->_target = ori.getTarget();
-	this->signature = ori.getSigned();
+	_target = ori.getTarget();
+	signature = ori.getSigned();
 	return *this;
 }
 
-std::string	RobotomyRequestForm::getTarget()
+std::string	RobotomyRequestForm::getTarget() const
 {
 	return _target;
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const &executor)
+void RobotomyRequestForm::execAction()
 {
-
+	std::cout << "VRRRRZZZZZZZZZZZZ" << std::endl;
+	if (rand() % 2)
+		std::cout << getTarget() << " has been robotomized successfully";
+	else
+		std::cout << getTarget() << " robotomy failed";
 }

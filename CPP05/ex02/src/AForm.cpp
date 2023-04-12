@@ -2,12 +2,17 @@
 
 const char* AForm::GradeTooHighException::what() const throw()
 {
-	return("AForm's grade is too high!");
+	return("Form grade is too high!");
 }
 
 const char* AForm::GradeTooLowException::what() const throw()
 {
-	return("AForm's grade is too low!");
+	return("Form grade is too low!");
+}
+
+const char* AForm::NotSignedException::what() const throw()
+{
+	return("Form isn't signed!");
 }
 
 AForm::AForm():_name("noname"), _signature_grade(1), _execute_grade(1)
@@ -48,12 +53,26 @@ void	AForm::checkgrade()
 		throw GradeTooHighException();
 }
 
-void	AForm::beSigned(Bureaucrat target)
+void	AForm::beSigned(Bureaucrat const & signatory)
 {
-	//need to use target->signAForm(getSignatureGrade())
-	if(target.signForm(*this) != 0)
+	if(signatory.signForm(*this) != 0)
 		throw GradeTooLowException();
 	signature = 1;
+}
+
+void	AForm::execute(Bureaucrat const & executor)
+{
+	if(getSigned() == 0)
+		throw NotSignedException();
+	if(executor.executeForm(*this) != 0)
+		throw GradeTooLowException();
+	execAction();
+}
+
+void	AForm::execAction()
+{
+	std::cout << "Nothing was done, but every process was followed!\n";
+	std::cout << "Ha-ha, bureaucracy joke\n";
 }
 
 std::string const AForm::getName() const

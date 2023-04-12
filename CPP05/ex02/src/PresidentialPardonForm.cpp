@@ -1,16 +1,16 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm(Shrubbery, 145, 137)
+PresidentialPardonForm::PresidentialPardonForm(): AForm("Pardon", 25, 5)
 {
 	_target = "NoName";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm(Shrubbery, 145, 137)
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("Pardon", 25, 5)
 {
 	_target = target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ori) : AForm(Shrubbery, 145, 137)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ori) : AForm("Pardon", 25, 5)
 {
 	_target = ori.getTarget();
 	signature = ori.getSigned();
@@ -18,19 +18,20 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &ori
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
-PresidentialPardonForm::PresidentialPardonForm& operator=(const PresidentialPardonForm &ori)
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm &ori)
 {
-	this->_target = ori.getTarget();
-	this->signature = ori.getSigned();
+	_target = ori.getTarget();
+	signature = ori.getSigned();
 	return *this;
 }
 
-std::string	PresidentialPardonForm::getTarget()
+std::string	PresidentialPardonForm::getTarget() const
 {
 	return _target;
 }
 
-void PresidentialPardonForm::execute(Bureaucrat const &executor)
+void PresidentialPardonForm::execAction()
 {
-
+	std::cout << "You are, by the present announce, informed that " << getTarget() << "\n";
+	std::cout << " has been graciously pardoned by Zaphod Beeblebrox!\n";
 }
