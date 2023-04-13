@@ -1,0 +1,7 @@
+class	Serializer
+{
+	private:
+
+	public:
+
+};
