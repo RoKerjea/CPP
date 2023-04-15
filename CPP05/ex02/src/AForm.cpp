@@ -72,7 +72,7 @@ void	AForm::execute(Bureaucrat const & executor)
 void	AForm::execAction()
 {
 	std::cout << "Nothing was done, but every process was followed!\n";
-	std::cout << "Ha-ha, bureaucracy joke\n";
+	std::cout << "Ha-ha, bureaucracy joke...\n";
 }
 
 std::string const AForm::getName() const

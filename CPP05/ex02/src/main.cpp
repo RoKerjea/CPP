@@ -80,12 +80,36 @@ int main()
 		AForm* A38 = new ShrubberyCreationForm("Home");
 
 		std::cout << *A38 << std::endl;
-		obelix.executeForm(*A38);
-		obelix.signForm(*A38);
-		asterix.signForm(*A38);
-		asterix.signForm(*A38);
-		obelix.executeForm(*A38);
-		asterix.executeForm(*A38);
+		try{
+		A38->execute(obelix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+
+		try{
+		A38->beSigned(asterix);
+		A38->execute(obelix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+
+		try{
+		A38->execute(asterix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
 		delete A38;
 	}
 	{
@@ -93,15 +117,48 @@ int main()
 
 		Bureaucrat	obelix	= Bureaucrat("Obelix", 73);
 		Bureaucrat	asterix = Bureaucrat("Asterix", 44);
-		AForm*	A38 = new RobotomyRequestForm("Someone");
+		AForm*	A38 = new RobotomyRequestForm("Detritus");
 		std::cout << *A38 << std::endl;
-		obelix.executeForm(*A38);
-		obelix.signForm(*A38);
-		asterix.signForm(*A38);
-		asterix.signForm(*A38);
-		obelix.executeForm(*A38);
+		try{
+		A38->execute(obelix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+
+		try{
+		A38->beSigned(asterix);
+		A38->execute(obelix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+
+		try{
+		A38->execute(asterix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		try{
 		for (int i = 0; i < 10; i++)
-			asterix.executeForm(*A38);
+			A38->execute(asterix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
 		delete A38;
 	}
 	{
@@ -109,17 +166,58 @@ int main()
 
 		Bureaucrat	obelix	= Bureaucrat("Obelix", 26);
 		Bureaucrat	asterix = Bureaucrat("Asterix", 4);
-		AForm*	A38 = new PresidentialPardonForm("Someone");
+		AForm*	A38 = new PresidentialPardonForm("Brutus");
 		std::cout << *A38 << std::endl;
-		obelix.executeForm(*A38);
-		obelix.signForm(*A38);
-		asterix.signForm(*A38);
-		asterix.signForm(*A38);
-		obelix.executeForm(*A38);
-		asterix.executeForm(*A38);
+		try{
+		A38->execute(obelix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+
+		try{
+		A38->beSigned(asterix);
+		A38->execute(obelix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+
+		try{
+		A38->execute(asterix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
 		delete A38;
 	}
-
+	{
+		LOG("TEST 11 : Generic Form::")
+		Bureaucrat	obelix	= Bureaucrat("Obelix", 26);
+		Bureaucrat	asterix = Bureaucrat("Asterix", 4);
+		AForm*	A38 = new AForm("kbis", 150, 150);
+		std::cout << *A38 << std::endl;
+		try{
+		A38->beSigned(asterix);
+		A38->execute(asterix);
+		}
+		catch (AForm::GradeTooLowException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		catch (AForm::NotSignedException &e) {
+		std::cerr << e.what() << std::endl;
+		}
+		delete A38;
+	}
 	std::cout << std::endl;
 	return 0;
 }

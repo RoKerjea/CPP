@@ -30,9 +30,14 @@ AForm*	Intern::pardon ( std::string target )
 	return new PresidentialPardonForm(target);
 }
 
+const char* Intern::InternError::what() const throw()
+{
+	return("wrong form requested\n");
+}
+
 int	Intern::identify_cases(std::string typetocreate)
 {
-	std::string type[3] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+	std::string type[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	for (int i = 0; i < 3; i++)
 	{
 		if (typetocreate == type[i])
@@ -47,8 +52,7 @@ AForm* Intern::makeForm(std::string typetocreate, std::string target)
 {
 	ptr_func functions[3] = {&Intern::shrubbery, &Intern::robotomy, &Intern::pardon};
 	int cases = identify_cases(typetocreate);
-	if (cases <= 3)
+	if (cases < 3)
 		return (this->*functions[cases])(target);
-	std::cout << "wrong form requested\n";
-	return NULL;
+	throw InternError();
 }

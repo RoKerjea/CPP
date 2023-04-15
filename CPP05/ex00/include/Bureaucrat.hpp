@@ -4,8 +4,6 @@
 #include <iostream>
 #include <string>
 
-class
-
 class Bureaucrat
 {
 	private:

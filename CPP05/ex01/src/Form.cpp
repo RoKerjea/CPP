@@ -50,7 +50,6 @@ void	Form::checkgrade()
 
 void	Form::beSigned(Bureaucrat target)
 {
-	//need to use target->signForm(getSignatureGrade())
 	if(target.signForm(*this) != 0)
 		throw GradeTooLowException();
 	signature = 1;

@@ -69,11 +69,8 @@ bool	Bureaucrat::signForm(Form formtosign)
 		std::cout << getName() << " signed " << formtosign.getName() << "\n";
 		return (0);
 	}
-	else
-	{
-		std::cout << getName() << " couldn't sign " << formtosign.getName() << " because ";
-		std::cout << "Grade to low to sign" << "\n";
-	}
+	std::cout << getName() << " couldn't sign " << formtosign.getName() << " because ";
+	std::cout << "Grade too low to sign" << "\n";
 	return (1);
 }
 

@@ -24,4 +24,9 @@ class Intern
 		Intern& operator=(const Intern &ori);
 		//actions
 		AForm* makeForm(std::string type, std::string target);
+		class InternError : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 };
