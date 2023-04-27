@@ -1,3 +1,6 @@
+#include <string>
+#include <iostream>
+
 class	ScalarConverter
 {
 	private:
@@ -7,6 +10,10 @@ class	ScalarConverter
 
 	//tools
 	int	parser(std::string input);
+	void	converter(int value);
+	void	converter(char value);
+	void	converter(float value);
+	void	converter(double value);
 	//4 converters from string?
 	//9 other converters from one of the 4 types to other 3?
 	//1 - 4 print method
@@ -43,4 +50,17 @@ class	ScalarConverter
 //maybe just 4 converts and then 4 prints, using explicit conversion?
 
 //PLAN
+//try catch until get proper format, then send pointer to print, then explicit static cast to new res?
 //id->convert->use result to use the appropriate print-> print do explicit conversion during print
+//static cast des videos de l'intra?
+//polymorphisme of the convert method to id implivcitly? but it's always a string as input though
+
+
+//int b = static_cast<int>(a); converti la valeur de a en format int pour assigner a b
+//c'est une conversion explicit, ce qui est plus safe pour les demotion
+
+//dynamic cast, peut echouer, demande que la classe soit soit polymorphe, avec fonction membre virtuelle
+//pobablement utile pour exo 02 avec exception et try/catch
+
+
+//reinterpret cast?? pas trop compris
