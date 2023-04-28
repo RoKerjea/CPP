@@ -1,23 +1,46 @@
+#pragma once
+
 #include <string>
 #include <iostream>
+#include <cmath>
+#include <climits>
+#include <cstdlib>
 
 class	ScalarConverter
 {
 	private:
-		// static??
+		int	type;
+		union{
+			char a;
+			int b;
+			float c;
+			double d;
+		};
 	public:
 	//constructors
+	ScalarConverter();
+	~ScalarConverter();
+
+	//getter
+	char	getchar();
+	int		getint();
+	float	getfloat();
+	double	getdouble();
+
+	//checker
+	int		ischarpossible();
+	int		isintpossible();
+
+	//printer
+	void	universal_print_char();
+	void	universal_print_int();
+	void	universal_print_float();
+	void	universal_print_double();
 
 	//tools
-	int	parser(std::string input);
-	void	converter(int value);
-	void	converter(char value);
-	void	converter(float value);
-	void	converter(double value);
-	//4 converters from string?
-	//9 other converters from one of the 4 types to other 3?
-	//1 - 4 print method
-
+	int		identificator(std::string input);
+	void	first_convert(std::string input);
+	void	convert(std::string input);
 };
 //convert method
 //need to identify type, convert tring o that type

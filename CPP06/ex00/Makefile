@@ -25,15 +25,11 @@ _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
 SRCS		= 	${addprefix src/, \
+				ScalarConverter.cpp \
 				main.cpp}
 
-# HEADER		= 	${addprefix include/, \
-# 				Intern.hpp \
-# 				AForm.hpp \
-# 				PresidentialPardonForm.hpp \
-# 				RobotomyRequestForm.hpp \
-# 				ShrubberyCreationForm.hpp \
-# 				Bureaucrat.hpp}
+HEADER		= 	${addprefix include/, \
+				ScalarConverter.hpp }
 
 RM			= rm -rf
 NAME		= ScalarConverter

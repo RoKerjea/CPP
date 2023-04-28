@@ -1,37 +1,25 @@
-#include <iostream>
-#include <string>
-
-union inputtype{
-	int a;
-	char c;
-	float f;
-	double d;
-};
+#include "ScalarConverter.hpp"
 
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
-	union U { int a; char b; float c; double d;} u;
-	u.c = 3.14;
-	void* x = static_cast<void*>(&u.c);    // x's value is "pointer to u"
-	char* z = static_cast<char*>(x);     // z's value is "pointer to u"
-	int z2 = static_cast<int>(u.c);     // z's value is "pointer to u"
-	float* z3 = static_cast<float*>(x);     // z's value is "pointer to u"
-	double* z4 = static_cast<double*>(x);     // z's value is "pointer to u"
-	// inputtype res;
-	// int test;
-	// test = 76;
-	// res.a = test;
-	// void*x = &res;
-	// char *c;
-	// c = static_cast<char*>(res);
-	std::cout << "char : " << *z << std::endl;
-	std::cout << "int : " << z2 << std::endl;
-	std::cout << "float : " << *z3 << std::endl;
-	std::cout << "double : " << *z4 << std::endl;
+	if (ac != 2)
+	{
+		std::cout << "Error, need exactly 1 argument\n";
+		return (1);
+	}
+	ScalarConverter	conv;
+	conv.convert(av[1]);
 	return (0);
-	// int type = identificator(input);
-	// res = convert(input, type);
-	// printconvert(res);
 }
+
+/* Real Plan:
+identify type, get int or enum
+convert to proper type, maybe tagged union
+send tagged union to 4 different final converts
+send converted value one by one, to their appropriate print, to handle edge cases
+finished
+Conclusion:
+i don't like having to use 4 differents converts,
+but i think i have to if i really want to respect the subject (not a template subject, no leaks, etc.)
+"type punning" from union struct could work, but it's unreliable,
+might leaks, has behavior undefined depending on system. It's too risky for a 42 subject.*/
