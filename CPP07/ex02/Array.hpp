@@ -7,6 +7,7 @@ class Array
 {
 	private:
 		T *tab;
+		unsigned int count;
 	public:
 		Array();
 		Array(unsigned int n);
