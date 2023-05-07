@@ -136,7 +136,7 @@ void	ScalarConverter::universal_print_int()
 void	ScalarConverter::universal_print_float()
 {
 	float fl = getfloat();
-	std::cout << "float: " << fl;
+	std::cout << "float: " << std::setprecision(5) << fl;
 	if (fl - static_cast<long>(fl) == 0)
 		std::cout << ".0";
 	std::cout << "f\n";
@@ -145,8 +145,8 @@ void	ScalarConverter::universal_print_float()
 void	ScalarConverter::universal_print_double()
 {
 	double db = getdouble();
-	std::cout << "double: " << db;
-	if (db - static_cast<long>(db) == 0)
+	std::cout << "double: " << std::setprecision(9) << db;
+	if (db - static_cast<int>(db) == 0)
 		std::cout << ".0";
 	std::cout << "\n";
 }
