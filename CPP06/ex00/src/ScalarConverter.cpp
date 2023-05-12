@@ -189,7 +189,6 @@ void	ScalarConverter::convert(std::string input)
 	type = identificator(input);
 	if (type == 4)
 		return;
-	// std::cout << input << " of type: " << type << std::endl;
 	first_convert(input);
 	universal_print_char();
 	universal_print_int();
