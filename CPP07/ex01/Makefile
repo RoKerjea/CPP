@@ -17,7 +17,7 @@ _WHITE=$'\033[37m
 # Inverted, i.e. colored backgrounds
 _IGREY=$'\033[40m
 _IRED=$'\033[41m
-_IGREEN=$'\033[42m
+_IGREEN=$'\033[42ma
 _IYELLOW=$'\033[43m
 _IBLUE=$'\033[44m
 _IPURPLE=$'\033[45m

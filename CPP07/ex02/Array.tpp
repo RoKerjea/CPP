@@ -1,62 +1,90 @@
+#ifndef ARRAY_TPP
+#define ARRAY_TPP
+
 #include "Array.hpp"
 
-Array<T>(void) : _tab(NULL) {}
-
-~Array<T>(void)
+template <typename T>
+Array<T>::Array()
 {
-	delete [] this->tab;
+	array_ = NULL;
+	capacity_ = 0;
 }
 
-Array<T>(Array const & copy)
+template <typename T>
+Array<T>::~Array()
 {
-	count = copy.size();
-	tab = new T[count];
-	for (int i = 0; i < count, i++)
-		tab[i] = copy.tab[i];
+	delete []array_;
 }
 
-Array<T>(unsigned int n)
+template <typename T>
+Array<T>::Array(Array<T> const & copy)
 {
-	if (n <= 0)
+	capacity_ = copy.capacity_;
+	array_ = new T[capacity_];
+	for (std::size_t i = 0; i < capacity_; i++)
+		array_[i] = copy.array_[i];
+}
+
+template <typename T>
+Array<T>::Array(std::size_t capacity)
+{
+	capacity_ = capacity;
+	array_ = new T[capacity_];
+}
+
+template <typename T>
+Array<T> &Array<T>::operator=(Array<T> const &rhs)
+{
+	Array tmpcopy(rhs);
+	swap(tmpcopy);
+	return *this;
+}
+template <typename T>
+T const &Array<T>::operator[](std::size_t const index) const
+{
+	if (index >= capacity_)
 		throw Array<T>::InvalidAccess();
-	count = n;
-	tab = new T[count];
+	return (array_[index]);
+}
+template <typename T>
+T &Array<T>::operator[](std::size_t const index)
+{
+	if (index >= capacity_)
+		throw Array<T>::InvalidAccess();
+	return (array_[index]);
 }
 
-Array<T> &operator=(Array<T> const &rhs)
+template <typename T>
+void	Array<T>::swap(Array<T> &other)
 {
-	if (this != &rhs)
+	std::swap(capacity_, other.capacity_);
+	std::swap(array_, other.array_);
+}
+
+template <typename T>
+const char* Array<T>::InvalidAccess::what() const throw()
+{
+	return("Invalid Access to array_!");
+}
+
+template <typename T>
+std::size_t	Array<T>::size(void) const
+{
+	return (capacity_);
+}
+
+template <typename T>
+std::ostream &operator<<(std::ostream &out, Array<T> const &array)
+{
+	out << "[";
+	if (array.size() != 0)
 	{
-		if (count)
-			delete [] tab;
-		count = rhs.size();
-		tab = new T[count];
-		for(int i = 0; i < count, i++)
-			tab[i] = rhs.tab[i];
+		for (std::size_t i = 0; i < array.size(); i++)
+			out <<", " << array[i];
 	}
-	return (*this);
+	out << "]";
+
+	return out;
 }
 
-T &operator[](unsigned int index)
-{
-	if (index >= count)
-		throw Array<T>::InvalidAccess();
-	return (tab[index]);
-}
-
-T const &operator[](unsigned int index) const
-{
-	if (index >= count)
-		throw Array<T>::InvalidAccess();
-	return (tab[index]);
-}
-
-const char* Array::InvalidAccess::what() const
-{
-	return("Invalid Access to tab!");
-}
-
-unsigned int	size(void) const
-{
-	return (count);
-}
+#endif

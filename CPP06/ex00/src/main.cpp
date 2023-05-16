@@ -7,7 +7,7 @@ int	main(int ac, char **av)
 		std::cout << "Error, need exactly 1 argument\n";
 		return (1);
 	}
-	ScalarConverter	conv;
-	conv.convert(av[1]);
+	ScalarConverter::get().convert(av[1]);
+	ScalarConverter::get().destruct();
 	return (0);
 }

@@ -5,6 +5,21 @@ ScalarConverter::ScalarConverter()
 ScalarConverter::~ScalarConverter()
 {}
 
+void ScalarConverter::destruct()
+{
+	delete _instance;
+	_instance = NULL;
+}
+
+ScalarConverter* ScalarConverter::_instance = &get();
+
+ScalarConverter& ScalarConverter::get()
+{
+	if (_instance == NULL)
+		_instance = new ScalarConverter;
+	return *_instance;
+}
+
 char	ScalarConverter::getchar()
 {
 	switch(type)
