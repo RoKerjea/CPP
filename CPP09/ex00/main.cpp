@@ -3,7 +3,12 @@
 int	main(int ac, char** av)
 {
 	if (ac != 2)
+	{
+		std::cout << "btc need exactly one argument\n";
 		return (1);
+	}
+	BitcoinExchange be ("data.csv");
+	be.execute(av[1]);
 	return(0);
 }
 /*
