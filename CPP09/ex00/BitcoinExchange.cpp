@@ -1,51 +1,94 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(std::string base_file_name)
+// std::fstream BitcoinExchange::checkinput(int ac, char **av)
+// {
+// 	std::fstream source_base;
+// 	struct stat info;
+
+// 	if (ac != 2)
+// 		throw std::invalid_argument("Error: need exactly one argument.");
+
+// 	lstat(av[1], &info);
+// 	if (S_ISDIR(info.st_mode) || S_ISLNK(info.st_mode))
+// 		throw std::invalid_argument("Error: argument is not a file.");
+
+// 	source_base.open(av[1]);
+// 	if(source_base.fail())
+// 	{
+// 		throw std::invalid_argument("Error: could not open file.");
+// 	}
+// 	return source_base;
+// }
+
+BitcoinExchange::BitcoinExchange(int ac, char **av)
 {
-	std::ifstream source_base;
-	source_base.open(base_file_name);//need protection in case of failure
+	// std::fstream source_base = checkinput(ac, av);
+	std::fstream source_base;
+	struct stat info;
+
+	if (ac != 2)
+		throw std::invalid_argument("Error: need exactly one argument.");
+
+	lstat(av[1], &info);
+	if (S_ISDIR(info.st_mode) || S_ISLNK(info.st_mode))
+		throw std::invalid_argument("Error: argument is not a file.");
+
+	source_base.open(av[1]);
 	if(source_base.fail())
 	{
-		//error during file.open()
+		throw std::invalid_argument("Error: could not open file.");
 	}
+	std::string							date;
+	long double							value;
 	while (!source_base.eof())
 	{
 		std::string line;
-		getline(source_base, line);
+		source_base >> line;
 		try
 		{
-			_database.insert (make_pair(line.substr(0, 10), std::atof(line.substr(11))));
+			date = line.substr(0, line.find(","));
+			value = atof(line.c_str() + strlen(date.c_str()) + 1);
+			_database.insert (make_pair(date, value));
 		}
 		catch(const std::exception& e) {}
 	}
 	source_base.close();
 }
 
-void	BitcoinExchange::execute(std::string input_file)
+void	BitcoinExchange::execute(char *input_file)
 {
 	std::ifstream input;
-	input.open(input_file);
+	struct stat info;
+
+	lstat(input_file, &info);
+	if (S_ISDIR(info.st_mode) || S_ISLNK(info.st_mode))
+		throw std::invalid_argument("Error: argument is not a file.");
+	input.open(input_file, std::fstream::in);
 	if(input.fail())
 	{
-		//error during file.open()
+		throw std::invalid_argument("Error: could not open file.");
 	}
-	while (!input.eof())
+	std::string line;
+	while (std::getline(input, line))
 	{
-		std::string line;
-		std::getline(input_file, line);
-		parseLine(line);
+		if (line.find("date | value") == std::string::npos)
+		{
+			std::cout << line << std::endl;
+			parseLine(line);
+		}
 	}
+
 }
 
 void	BitcoinExchange::parseLine(std::string line)
 {
-	int c = count(line.begin(), line.end(), '|');
-	if(c != 1)
-	{
-		std::cout << "Error: bad input => " << line << std::endl;
-		return; //maybe should be a throw?
-	}
-	c = line.find('|');
+	// int c = count(line.begin(), line.end(), '|');
+	// if(c != 1)
+	// {
+	// 	std::cout << "Error: bad input => " << line << std::endl;
+	// 	return; //maybe should be a throw?
+	// }
+	int c = line.find('|');
 	std::string date = parseDate(line.substr(0, c));
 	float	number = parseNumber(line.substr(c + 1));
 	if (date.empty() || number == -1.0)

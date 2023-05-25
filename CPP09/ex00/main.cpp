@@ -2,13 +2,15 @@
 
 int	main(int ac, char** av)
 {
-	if (ac != 2)
-	{
-		std::cout << "btc need exactly one argument\n";
-		return (1);
+	try {
+		BitcoinExchange be (ac, av);
+		be.execute(av[1]);
 	}
-	BitcoinExchange be ("data.csv");
-	be.execute(av[1]);
+	catch(const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	// be.execute(av[1]);
 	return(0);
 }
 /*
