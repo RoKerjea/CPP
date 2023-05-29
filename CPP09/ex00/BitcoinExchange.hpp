@@ -22,9 +22,11 @@ class BitcoinExchange
 		BitcoinExchange(int ac, char **av);
 		// std::fstream checkinput(int ac, char **av);
 		void	execute(char *line);
-		void	parseLine(std::string line);
-		std::string	parseDate(std::string line);
-		float	parseNumber(std::string line);
+		// void	parseLine(std::string line);
+		// std::string	parseDate(std::string line);
+		void	checkData(std::string str);
+		void	exploitData(std::string str);
+		// float	parseNumber(std::string line);
 };
 
 /*
