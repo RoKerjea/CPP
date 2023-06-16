@@ -5,6 +5,9 @@
 template< typename T >
 T const & max(T const & x, T const & y)
 {
+	if (y>= x)
+		return y;
+	return x;
 	return ( x>=y ? x : y);
 }
 
@@ -15,7 +18,7 @@ T const & min(T const & x, T const & y)
 }
 
 template< typename T >
-void swap(T const & x, T const & y)
+void swap(T & x, T & y)
 {
 	T temp;
 	temp = x;
