@@ -64,7 +64,7 @@ void	Array<T>::swap(Array<T> &other)
 template <typename T>
 const char* Array<T>::InvalidAccess::what() const throw()
 {
-	return("Invalid Access to array_!");
+	return("Invalid Access to array !");
 }
 
 template <typename T>
@@ -79,7 +79,8 @@ std::ostream &operator<<(std::ostream &out, Array<T> const &array)
 	out << "[";
 	if (array.size() != 0)
 	{
-		for (std::size_t i = 0; i < array.size(); i++)
+		out << array[0];
+		for (std::size_t i = 1; i < array.size(); i++)
 			out <<", " << array[i];
 	}
 	out << "]";
