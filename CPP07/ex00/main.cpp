@@ -39,4 +39,15 @@ int	main(void)
 	std::cout <<"Before swap c = "<< c << " and d = " << d << std::endl;
 	swap(c, d);
 	std::cout <<"After swap c = "<< c << " and d = " << d << std::endl;
+
+	std::string e = "chaine1";
+	std::string f = "chaine2";
+	std::cout <<"Max of "<< e << " and " << f << "\nis ";
+	std::cout << ::max( e, f ) << std::endl;
+	std::cout <<"and Min is " << ::min( e, f ) << std::endl;
+	std::cout <<"Before swap e = "<< e << " and f = " << f << std::endl;
+	swap(e, f);
+	std::cout <<"After swap e = "<< e << " and f = " << f << std::endl;
+
+	return (0);
 }

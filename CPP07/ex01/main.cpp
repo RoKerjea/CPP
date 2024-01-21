@@ -15,5 +15,11 @@ int	main()
 	std::cout << "\nSTRING ARRAY:\n" << std::endl;
 	::iter(strTab, 4, &printer);
 
+
+	//Doesn't succeed but try to apply the increment function to the string array
+	// std::cout << "\nSTRING ARRAY (after increment):\n" << std::endl;
+	// ::iter(strTab, 4, &increment);
+	// ::iter(strTab, 4, &printer);
+
 	return 0;
 }

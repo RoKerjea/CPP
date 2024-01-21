@@ -30,7 +30,6 @@ int	main(void)
 	std::cout << array2 << std::endl;
 	array2[0] = 10;
 	std::cout <<"array2 after modification: " << array2 << std::endl;
-	std::cout <<"array after modification of array2: "array1 << std::endl;
+	std::cout <<"array after modification of array2: " << array1 << std::endl;
 	//check size after deletion/addition
-
 }
