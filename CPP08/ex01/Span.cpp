@@ -35,11 +35,11 @@ void	Span::addNumber(int toAdd)
 		throw Span::InvalidSpan();
 }
 
-size_t	Span::shortestSpan(void)
+long	Span::shortestSpan(void)
 {
 	if (_vec.size() < 2)
 		throw InvalidSpan();
-	size_t	res;
+	long	res;
 	std::vector<int> tmp = _vec;
 	std::vector<int>::iterator	index;
 
@@ -47,36 +47,32 @@ size_t	Span::shortestSpan(void)
 	index = tmp.begin();
 	while (index != (tmp.end() - 1))
 	{
-		if(res > (*(index + 1)  *index))
-			res = *(index + 1)  *index;
+		if(res > (*(index + 1) - *index))
+			res = *(index + 1) - *index;
 		index++;
 	}
 	return (res);
 
 }
 
-size_t Span::longestSpan(void)
+long Span::longestSpan(void)
 {
 	if (_vec.size() < 2)
 		throw InvalidSpan();
 	int max = *std::max_element(_vec.begin(), _vec.end());
 	int	min = *std::min_element(_vec.begin(), _vec.end());
 
-	return	static_cast<size_t> (max - min);
+	return	(max - min);
 }
 
-void	Span::AddRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	while (begin != end)
-	{
-		if (_vec.size() >= _max)
-			throw Span::InvalidSpan();
-		_vec.push_back(*begin);
-		begin++;
-	}
+	if (std::distance(begin, end) > static_cast<int>(_max))
+		throw InvalidSpan();
+	_vec.insert(_vec.end(), begin, end);
 }
 
-const	char* Span::InvalidSpan::what() const
+const	char *Span::InvalidSpan::what(void) const throw()
 {
 	return("Invalid operation to Span!");
 }
