@@ -43,6 +43,13 @@ bool vec_is_sorted(std::vector<int> &vec)
 	return true;
 }
 
+std::vector<int> sort_vec_index(std::vector<int> &vec)
+{
+	//can i find the the list of index of the vector, after sorting it?
+	//i can create a vector of pairs, with the first element being the value, and the second element being the index
+}
+
+
 std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 {
 	if (vec_is_sorted(vec))
