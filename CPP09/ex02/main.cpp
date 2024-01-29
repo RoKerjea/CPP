@@ -108,4 +108,11 @@ int main(int ac, char** av)
 	pm.Print_vec();
 	pm.Sort_vec();
 	//checkArgs();
+	// std::cout << "index after 2: " << pm.jacobsthal_index(2) << std::endl;
+	// std::cout << "index after 4: " << pm.jacobsthal_index(4) << std::endl;
+	// std::cout << "index after 85: " << pm.jacobsthal_index(85) << std::endl;
+	// std::cout << "index after 10: " << pm.jacobsthal_index(10) << std::endl;
+	// std::cout << "index after 11: " << pm.jacobsthal_index(11) << std::endl;
+	// std::cout << "index after 12: " << pm.jacobsthal_index(12) << std::endl;
+	// std::cout << "index after 13: " << pm.jacobsthal_index(13) << std::endl;
 }
