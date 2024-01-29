@@ -31,8 +31,29 @@ void PmergeMe::Print_vec()
 	std::cout << std::endl;
 }
 
+bool vec_is_sorted(std::vector<int> &vec)
+{
+	for (unsigned long i = 0; i < vec.size() - 1; i++)
+	{
+		if (vec[i] > vec[i + 1])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 {
+	if (vec_is_sorted(vec))
+	{
+		return vec;
+	}
+	if (vec.size() == 2)
+	{
+		std::swap(vec[0], vec[1]);
+		return vec;
+	}
 	//first step: make pair of elements in the vector
 	std::vector<std::pair<int, int> > pairs;
 	for (unsigned long i = 0; i < vec.size() - 1; i += 2)
@@ -70,12 +91,13 @@ std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 		std::cout << main_chain[i] << " ";
 	}
 	std::cout << std::endl;
-	
+
 	//third step: recursively sort the pairs, using the larger element of each pair
 	//extract the larger element of each pair into a vector "Main chain"
 	//call merge_insert_vec on the main chain
 	//merge_insert_vec will sort the main chain, and return a sorted vector
 	//i can use a basic sort for now, and make recursive calls later
+	main_chain = Merge_insert_vec(main_chain);
 	std::sort(main_chain.begin(), main_chain.end());
 	std::cout << "main chain after sort" << std::endl;
 	for (unsigned long i = 0; i < main_chain.size(); i++)
