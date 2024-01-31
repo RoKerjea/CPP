@@ -8,12 +8,47 @@ PmergeMe::PmergeMe(int ac, char **av)
 PmergeMe::~PmergeMe()
 {}
 
+std::vector<ValueIndex> PmergeMe::convert_to_value_index(std::vector<int> &vec)
+{
+	std::vector<ValueIndex> value_index_vec;
+	for (unsigned long i = 0; i < vec.size(); i++)
+	{
+		value_index_vec.push_back(ValueIndex(vec[i], i));
+	}
+	return value_index_vec;
+}
+
+std::vector<int> PmergeMe::convert_to_int(std::vector<ValueIndex> &value_index_vec)
+{
+	std::vector<int> int_vec;
+	for (unsigned long i = 0; i < value_index_vec.size(); i++)
+	{
+		int_vec.push_back(value_index_vec[i].getValue());
+	}
+	return int_vec;
+}
+
+std::vector<unsigned long> PmergeMe::convert_to_index(std::vector<ValueIndex> &value_index_vec)
+{
+	std::vector<unsigned long> index_vec;
+	for (unsigned long i = 0; i < value_index_vec.size(); i++)
+	{
+		index_vec.push_back(value_index_vec[i].getIndex());
+	}
+	return index_vec;
+}
+
 void PmergeMe::Sort_vec()
 {
 	//save start time
-	std::vector<int> sorted_vec = Merge_insert_vec(_vec);
+	std::vector<unsigned long> sorted_vec = Merge_insert_vec(_vec);
+	std::vector<int> int_sorted_vec;
+	for (unsigned long i = 0; i < sorted_vec.size(); i++)
+	{
+		int_sorted_vec.push_back(_vec[sorted_vec[i]]);
+	}
 	std::cout << "sorted vector" << std::endl;
-	for (std::vector<int>::const_iterator it = sorted_vec.begin(); it != sorted_vec.end(); ++it) {
+	for (std::vector<int>::const_iterator it = int_sorted_vec.begin(); it != int_sorted_vec.end(); ++it) {
 		std::cout << *it << " ";
 	}
 	//the vector should be sorted
@@ -31,7 +66,7 @@ void PmergeMe::Print_vec()
 	std::cout << std::endl;
 }
 
-bool vec_is_sorted(std::vector<int> &vec)
+bool vec_is_sorted(std::vector<ValueIndex> &vec)
 {
 	for (unsigned long i = 0; i < vec.size() - 1; i++)
 	{
@@ -43,31 +78,32 @@ bool vec_is_sorted(std::vector<int> &vec)
 	return true;
 }
 
-std::vector<int> sort_vec_index(std::vector<int> &vec)
-{
-	//can i find the the list of index of the vector, after sorting it?
-	//i can create a vector of pairs, with the first element being the value, and the second element being the index
-}
+// std::vector<int> sort_vec_index(std::vector<int> &vec)
+// {
+// 	//can i find the the list of index of the vector, after sorting it?
+// 	//i can create a vector of pairs, with the first element being the value, and the second element being the index
+// }
 
 
-std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
+std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 {
+	std::vector<ValueIndex> vec = convert_to_value_index(intvec);
 	if (vec_is_sorted(vec))
 	{
-		return vec;
+		return convert_to_index(vec);
 	}
 	if (vec.size() == 2)
 	{
 		std::swap(vec[0], vec[1]);
-		return vec;
+		return convert_to_index(vec);
 	}
 	//first step: make pair of elements in the vector
-	std::vector<std::pair<int, int> > pairs;
+	std::vector<std::pair<ValueIndex, ValueIndex> > pairs;
 	for (unsigned long i = 0; i < vec.size() - 1; i += 2)
 	{
 		pairs.push_back(std::make_pair(vec[i], vec[i + 1]));
 	}
-	int pending_element = -1;
+	ValueIndex pending_element = ValueIndex(-1, -1);
 	if (vec.size() % 2 != 0)
 	{
 		pending_element = vec[vec.size() - 1];
@@ -87,7 +123,8 @@ std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 	{
 		std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
 	}
-	std::vector<int> main_chain;
+	// return convert_to_index(vec);
+	std::vector<ValueIndex> main_chain;
 	for (unsigned long i = 0; i < pairs.size(); i++)
 	{
 		main_chain.push_back(pairs[i].first);
@@ -104,23 +141,32 @@ std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 	//call merge_insert_vec on the main chain
 	//merge_insert_vec will sort the main chain, and return a sorted vector
 	//i can use a basic sort for now, and make recursive calls later
-	main_chain = Merge_insert_vec(main_chain);
-	std::sort(main_chain.begin(), main_chain.end());
+	std::vector<int> main_chain_int = convert_to_int(main_chain);
+	std::vector<unsigned long> pair_sorted_index = Merge_insert_vec(main_chain_int);
+	// std::sort(main_chain.begin(), main_chain.end());
+	main_chain.clear();
+	// std::vector<ValueIndex> main_chain;
+	std::vector<ValueIndex> pending_chain;
+	for (unsigned long i = 0; i < pair_sorted_index.size(); i++)
+	{
+		main_chain.push_back(pairs[pair_sorted_index[i]].first);
+		pending_chain.push_back(pairs[pair_sorted_index[i]].second);
+	}
 	std::cout << "main chain after sort" << std::endl;
 	for (unsigned long i = 0; i < main_chain.size(); i++)
 	{
 		std::cout << main_chain[i] << " ";
 	}
 	std::cout << std::endl;
-	std::vector<int> pending_chain;
+	// std::vector<int> pending_chain;
 	//now i should order the pairs in the vector, using the sorted main chain
 	//i don't see how to do that just yet...
 	//wait, the result of the merge_insert_vec is a sorted vector corresponding to the main chain...
 	//i can use that to create the pending chain, by checking the main chain, finding the next element, getting the pair it belongs to, and adding the other element of the pair to the pending chain. Then deleting the pair from the pair vector.
 	//not the most efficient way i think, but it's simple enough to implement
-	pending_chain = order_pairs(pairs, main_chain);
+	// pending_chain = order_pairs(pairs, main_chain);
 	//add the pending element to the pending list of elements
-	if (pending_element != -1)
+	if (pending_element != ValueIndex(-1, -1))
 	{
 		pending_chain.push_back(pending_element);
 	}
@@ -158,7 +204,7 @@ std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 		}
 		else
 			pending_index = jacobsthal_index(pending_index);
-		unsigned int pending_index_value = pending_chain[pending_index];
+		ValueIndex pending_index_value = pending_chain[pending_index];
 		std::cout << "pending index: " << pending_index << std::endl;
 		std::cout << "pending value to insert: " << pending_index_value << std::endl;
 		//get insert position, using a binary search
@@ -167,17 +213,17 @@ std::vector<int> PmergeMe::Merge_insert_vec(std::vector<int> &vec)
 		main_chain.insert(main_chain.begin() + insert_position, pending_index_value);
 	}
 
-	std::cout << "pending chain" << std::endl;
-	for (unsigned long i = 0; i < pending_chain.size(); i++)
-	{
-		std::cout << pending_chain[i] << " ";
-	}
-	std::cout << std::endl;
+	// std::cout << "pending chain" << std::endl;
+	// for (unsigned long i = 0; i < pending_chain.size(); i++)
+	// {
+	// 	std::cout << pending_chain[i] << " ";
+	// }
+	// std::cout << std::endl;
 	//return sorted vector main chain
-	return main_chain;
+	return convert_to_index(main_chain);
 }
 
-unsigned long PmergeMe::binary_insert_position(std::vector<int> &main_chain, unsigned long start, unsigned long end, int value)
+unsigned long PmergeMe::binary_insert_position(std::vector<ValueIndex> &main_chain, unsigned long start, unsigned long end, ValueIndex value)
 {
 	if (end < start)
 	{

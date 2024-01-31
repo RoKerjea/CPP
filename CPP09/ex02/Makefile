@@ -25,9 +25,11 @@ _ICYAN=$'\033[46m
 _IWHITE=$'\033[47m
 
 SRCS		= 	main.cpp \
-				PmergeMe.cpp
+				PmergeMe.cpp \
+				ValueIndex.cpp
 
-HEADER		= 	PmergeMe.hpp
+HEADER		= 	PmergeMe.hpp \
+				ValueIndex.hpp
 
 RM			= rm -rf
 NAME		= PmergeMe

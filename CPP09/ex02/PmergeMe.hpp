@@ -11,7 +11,8 @@
 #include <iterator>
 #include <exception>
 #include <algorithm>
-#include <cstddef> 
+#include <cstddef>
+#include "ValueIndex.hpp"
 //Note: can i count the number of comparaisons that were made?
 //that would be a good way to prove i used ford-Johnson correctly
 //compare in example is just std::less<int>()
@@ -32,10 +33,14 @@ class PmergeMe
 
 		void	Print_vec();
 		void	Sort_vec();
-		std::vector<int>	Merge_insert_vec(std::vector<int> &vec);
+		std::vector<unsigned long>	Merge_insert_vec(std::vector<int> &vec);
 		std::vector<int> order_pairs(std::vector<std::pair<int, int> > &pairs, std::vector<int> &main_chain);
 		unsigned long jacobsthal_index(unsigned long index);
-		unsigned long binary_insert_position(std::vector<int> &main_chain, unsigned long start, unsigned long end, int value);
+		unsigned long binary_insert_position(std::vector<ValueIndex> &main_chain, unsigned long start, unsigned long end, ValueIndex value);
+
+		std::vector<int> convert_to_int(std::vector<ValueIndex> &value_index_vec);
+		std::vector<ValueIndex> convert_to_value_index(std::vector<int> &vec);
+		std::vector<unsigned long> convert_to_index(std::vector<ValueIndex> &value_index_vec);
 };
 
 //need a print vec function, to show order at different steps

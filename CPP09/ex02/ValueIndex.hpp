@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 class ValueIndex
 {
 	private:
@@ -19,11 +18,13 @@ class ValueIndex
 		unsigned long getIndex(void) const;
 		bool operator<(ValueIndex const &rhs) const;
 		bool operator>(ValueIndex const &rhs) const;
-		bool operator<=(ValueIndex const &rhs) const;
-		bool operator>=(ValueIndex const &rhs) const;
+		// bool operator<=(ValueIndex const &rhs) const;
+		// bool operator>=(ValueIndex const &rhs) const;
 		bool operator==(ValueIndex const &rhs) const;
 		bool operator!=(ValueIndex const &rhs) const;
-}
+};
+
+std::ostream &operator<<(std::ostream &out, ValueIndex const &rhs);
 //if i treat my new class exactly like the int in my pmergeme, i can use the same functions
 //and at the end of the sort, i can create a vector of index, and return it
 //like:
