@@ -83,6 +83,7 @@ int main()
 			Span	rangespan(105);
 
 			rangespan.addRange(tab.begin(), tab.end());
+
 			std::cout << "short :	" << rangespan.shortestSpan() << std::endl;
 			std::cout << "long :	" << rangespan.longestSpan() << std::endl;
 

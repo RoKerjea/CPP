@@ -67,7 +67,7 @@ long Span::longestSpan(void)
 
 void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	if (std::distance(begin, end) > static_cast<int>(_max))
+	if ((std::distance(begin, end) + _vec.size()) > static_cast<unsigned long>(_max))
 		throw InvalidSpan();
 	_vec.insert(_vec.end(), begin, end);
 }

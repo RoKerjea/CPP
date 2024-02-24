@@ -51,7 +51,7 @@ int main()
 		std::cout << "is the stack empty ? true = 1 / false = 0 --> " << mstack.empty() << std::endl;
 		mstack.push(5);
 		mstack.push(17);
-		std::cout << "size :		" << mstack.size() << std::endl;	
+		std::cout << "size :		" << mstack.size() << std::endl;
 		std::cout << "top value :	" << mstack.top() << std::endl;
 
 		std::cout << std::endl << ORANGE << "2) On retire la valeur du top de la stack" << RESET << std::endl;
@@ -72,12 +72,9 @@ int main()
 		std::cout  << "size :		" << mstack.size() << std::endl;
 		std::cout << "top value :	" << mstack.top() << std::endl;
 
-		std::cout << std::endl << ORANGE << "4) On affiche le contenu de la stack (bottom to top) grace au MutantStack Iterator !" << RESET << std::endl;	
+		std::cout << std::endl << ORANGE << "4) On affiche le contenu de la stack (bottom to top) grace au MutantStack Iterator !" << RESET << std::endl;
 		MutantStack<int>::iterator it = mstack.begin();
-		MutantStack<int>::iterator ite = mstack.end();
-		++it;
-		--it;
-		while (it != ite)
+		while (it != mstack.end())
 		{
 			std::cout << *it << std::endl;
 			++it;
@@ -92,21 +89,16 @@ int main()
 		std::cout  << "size :		" << copystack.size() << std::endl;
 		std::cout << "top value :	" << copystack.top() << std::endl;
 
-		std::cout << std::endl << ORANGE << "4) On affiche le contenu de copystack (bottom to top) grace au MutantStack Iterator !" << RESET << std::endl;	
-		// MutantStack<int>::iterator itc = copystack.begin();
-		// MutantStack<int>::iterator itec = copystack.end();
+		std::cout << std::endl << ORANGE << "4) On affiche le contenu de copystack (bottom to top) grace au MutantStack Iterator !" << RESET << std::endl;
 		it = copystack.begin();
-		ite = copystack.end();
-		++it;
-		--it;
-		while (it != ite)
+		while (it != copystack.end())
 		{
 			std::cout << *it << std::endl;
 			++it;
 		}
 	//---------------------------//
 		std::cout << std::endl << GREEN << "Avec la stack originelle !" << RESET << std::endl;
-		
+
 		std::stack<int>	s(mstack);
 		std::cout << std::endl << ORANGE << "1) On cree une stack de type stack originelle, copie de notre mutantStack" << RESET << std::endl;
 		std::cout << "size :		" << s.size() << std::endl;	
@@ -126,13 +118,13 @@ int main()
 //---------------------------//
 	{
 		std::cout << std::endl << RED << "COMPARAISON AVEC CONTAINER LIST" << RESET << std::endl;
-	
+
 		std::list<int>	lst;
 
 		std::cout << std::endl << ORANGE << "1) On cree une list et on y entre 2 valeurs" << RESET << std::endl;
 		lst.push_back(5);
 		lst.push_back(17);
-		std::cout << "size :		" << lst.size() << std::endl;	
+		std::cout << "size :		" << lst.size() << std::endl;
 		std::cout << "top value :	" << lst.back() << std::endl;
 
 		std::cout << std::endl << ORANGE << "2) On retire la valeur du back de la lst ( = top de la stack !)" << RESET << std::endl;
@@ -153,12 +145,9 @@ int main()
 		std::cout  << "size :		" << lst.size() << std::endl;
 		std::cout << "top value :	" << lst.back() << std::endl;
 
-		std::cout << std::endl << ORANGE << "4) On affiche le contenu de la stack (bottom to top) grace au MutantStack Iterator !" << RESET << std::endl;	
+		std::cout << std::endl << ORANGE << "4) On affiche le contenu de la stack (bottom to top) grace a l'iterateur de list !" << RESET << std::endl;
 		std::list<int>::iterator itl = lst.begin();
-		std::list<int>::iterator itel = lst.end();
-		++itl;
-		--itl;
-		while (itl != itel)
+		while (itl != lst.end())
 		{
 			std::cout << *itl << std::endl;
 			++itl;
