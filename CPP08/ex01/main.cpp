@@ -30,7 +30,7 @@ int main()
 		sp.addNumber(-8);
 		sp.addNumber(3);
 		sp.addNumber(17);
-		sp.addNumber(-3);
+		sp.addNumber(-2147483648);
 		sp.addNumber(11);
 
 		std::cout << "short :	" << sp.shortestSpan() << std::endl;

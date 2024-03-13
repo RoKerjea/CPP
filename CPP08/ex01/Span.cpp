@@ -59,8 +59,8 @@ long Span::longestSpan(void)
 {
 	if (_vec.size() < 2)
 		throw InvalidSpan();
-	int max = *std::max_element(_vec.begin(), _vec.end());
-	int	min = *std::min_element(_vec.begin(), _vec.end());
+	long	max = *std::max_element(_vec.begin(), _vec.end());
+	long	min = *std::min_element(_vec.begin(), _vec.end());
 
 	return	(max - min);
 }
