@@ -55,7 +55,6 @@ void PmergeMe::Sort_vec()
 	//print the vector
 	//print the number of comparaisons
 	//print the time it took to sort the vector (start time - end time)
-
 }
 
 void PmergeMe::Print_vec()
@@ -97,7 +96,7 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 		std::swap(vec[0], vec[1]);
 		return convert_to_index(vec);
 	}
-	//first step: make pair of elements in the vector
+	//FIRST STEP: make pair of elements in the vector
 	std::vector<std::pair<ValueIndex, ValueIndex> > pairs;
 	for (unsigned long i = 0; i < vec.size() - 1; i += 2)
 	{
@@ -108,7 +107,7 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	{
 		pending_element = vec[vec.size() - 1];
 	}
-	//second step: sort inside the pairs
+	//SECOND STEP: order inside the pairs,first > second
 	for (unsigned long i = 0; i < pairs.size(); i++)
 	{
 		if (pairs[i].first < pairs[i].second)
@@ -123,6 +122,7 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	{
 		std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
 	}
+	//create a new vector with the value of each "first" in the pair => main_chain
 	std::vector<ValueIndex> main_chain;
 	for (unsigned long i = 0; i < pairs.size(); i++)
 	{
@@ -135,16 +135,12 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	}
 	std::cout << std::endl;
 
-	//third step: recursively sort the pairs, using the larger element of each pair
-	//extract the larger element of each pair into a vector "Main chain"
+	//THIRD STEP: recursively sort the pairs, using the larger element of each pair
 	//call merge_insert_vec on the main chain
 	//merge_insert_vec will sort the main chain, and return a sorted vector
-	//i can use a basic sort for now, and make recursive calls later
 	std::vector<int> main_chain_int = convert_to_int(main_chain);
 	std::vector<unsigned long> pair_sorted_index = Merge_insert_vec(main_chain_int);
-	// std::sort(main_chain.begin(), main_chain.end());
 	main_chain.clear();
-	// std::vector<ValueIndex> main_chain;
 	std::vector<ValueIndex> pending_chain;
 	for (unsigned long i = 0; i < pair_sorted_index.size(); i++)
 	{
@@ -157,20 +153,11 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 		std::cout << main_chain[i] << " ";
 	}
 	std::cout << std::endl;
-	// std::vector<int> pending_chain;
-	//now i should order the pairs in the vector, using the sorted main chain
-	//i don't see how to do that just yet...
-	//wait, the result of the merge_insert_vec is a sorted vector corresponding to the main chain...
-	//i can use that to create the pending chain, by checking the main chain, finding the next element, getting the pair it belongs to, and adding the other element of the pair to the pending chain. Then deleting the pair from the pair vector.
-	//not the most efficient way i think, but it's simple enough to implement
-	// pending_chain = order_pairs(pairs, main_chain);
-
-	//add the pending element to the pending list of elements
+	//add the pending element (if any) to the pending list of elements
 	if (pending_element != ValueIndex(-1, -1))
 	{
 		pending_chain.push_back(pending_element);
 	}
-
 	std::cout << "pending chain after ordering" << std::endl;
 	for (unsigned long i = 0; i < pending_chain.size(); i++)
 	{
@@ -179,8 +166,8 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	std::cout << std::endl;
 	//get first element of the pending list of elements to be the first element of the main chain (b0 in book)
 	main_chain.insert(main_chain.begin(), pending_chain[0]);
-	//fourth step : merge the pending unsorted elements of the pairs in the final vector
-	//using the jacobsthal sequence to find the next element of the pending chain to add to the main chain
+	//FOURTH : merge the pending unsorted elements of the pairs in the final vector
+	//using the jacobsthal sequence to find the next element of the pending chain to insert to the main chain
 	unsigned long pending_index = 0;
 	for (unsigned long i = 0; i < pending_chain.size() - 1; i++)
 	{
@@ -212,14 +199,6 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 		//insert pending[index] in main chain at insert position
 		main_chain.insert(main_chain.begin() + insert_position, pending_index_value);
 	}
-
-	// std::cout << "pending chain" << std::endl;
-	// for (unsigned long i = 0; i < pending_chain.size(); i++)
-	// {
-	// 	std::cout << pending_chain[i] << " ";
-	// }
-	// std::cout << std::endl;
-	//return sorted vector main chain
 	return convert_to_index(main_chain);
 }
 
@@ -254,30 +233,6 @@ unsigned long PmergeMe::binary_insert_position(std::vector<ValueIndex> &main_cha
 	}
 	return binary_insert_position(main_chain, start, mid - 1, value);
 }
-
-// std::vector<int> PmergeMe::order_pairs(std::vector<std::pair<int, int> > &pairs, std::vector<int> &main_chain)
-// {
-// 	std::vector<int> pending_chain;
-// 	for (unsigned long i = 0; i < main_chain.size(); i++)
-// 	{
-// 		for (unsigned long j = 0; j < pairs.size(); j++)
-// 		{
-// 			if (main_chain[i] == pairs[j].first)
-// 			{
-// 				pending_chain.push_back(pairs[j].second);
-// 				pairs.erase(pairs.begin() + j);
-// 				break;
-// 			}
-// 			else if (main_chain[i] == pairs[j].second)
-// 			{
-// 				pending_chain.push_back(pairs[j].first);
-// 				pairs.erase(pairs.begin() + j);
-// 				break;
-// 			}
-// 		}
-// 	}
-// 	return pending_chain;
-// }
 
 //need a function to get the next index to add to the main chain
 //it use the jacobsthal sequence
