@@ -123,7 +123,6 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	{
 		std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
 	}
-	// return convert_to_index(vec);
 	std::vector<ValueIndex> main_chain;
 	for (unsigned long i = 0; i < pairs.size(); i++)
 	{
@@ -165,6 +164,7 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	//i can use that to create the pending chain, by checking the main chain, finding the next element, getting the pair it belongs to, and adding the other element of the pair to the pending chain. Then deleting the pair from the pair vector.
 	//not the most efficient way i think, but it's simple enough to implement
 	// pending_chain = order_pairs(pairs, main_chain);
+
 	//add the pending element to the pending list of elements
 	if (pending_element != ValueIndex(-1, -1))
 	{
@@ -229,8 +229,6 @@ unsigned long PmergeMe::binary_insert_position(std::vector<ValueIndex> &main_cha
 	{
 		return start;
 	}
-	// unsigned long mid = (start + end) / 2;
-
     unsigned long mid = (start + end) / 2;
 	// std::cout << "start: " << start << std::endl;
 	// std::cout << "end: " << end << std::endl;
@@ -257,29 +255,29 @@ unsigned long PmergeMe::binary_insert_position(std::vector<ValueIndex> &main_cha
 	return binary_insert_position(main_chain, start, mid - 1, value);
 }
 
-std::vector<int> PmergeMe::order_pairs(std::vector<std::pair<int, int> > &pairs, std::vector<int> &main_chain)
-{
-	std::vector<int> pending_chain;
-	for (unsigned long i = 0; i < main_chain.size(); i++)
-	{
-		for (unsigned long j = 0; j < pairs.size(); j++)
-		{
-			if (main_chain[i] == pairs[j].first)
-			{
-				pending_chain.push_back(pairs[j].second);
-				pairs.erase(pairs.begin() + j);
-				break;
-			}
-			else if (main_chain[i] == pairs[j].second)
-			{
-				pending_chain.push_back(pairs[j].first);
-				pairs.erase(pairs.begin() + j);
-				break;
-			}
-		}
-	}
-	return pending_chain;
-}
+// std::vector<int> PmergeMe::order_pairs(std::vector<std::pair<int, int> > &pairs, std::vector<int> &main_chain)
+// {
+// 	std::vector<int> pending_chain;
+// 	for (unsigned long i = 0; i < main_chain.size(); i++)
+// 	{
+// 		for (unsigned long j = 0; j < pairs.size(); j++)
+// 		{
+// 			if (main_chain[i] == pairs[j].first)
+// 			{
+// 				pending_chain.push_back(pairs[j].second);
+// 				pairs.erase(pairs.begin() + j);
+// 				break;
+// 			}
+// 			else if (main_chain[i] == pairs[j].second)
+// 			{
+// 				pending_chain.push_back(pairs[j].first);
+// 				pairs.erase(pairs.begin() + j);
+// 				break;
+// 			}
+// 		}
+// 	}
+// 	return pending_chain;
+// }
 
 //need a function to get the next index to add to the main chain
 //it use the jacobsthal sequence

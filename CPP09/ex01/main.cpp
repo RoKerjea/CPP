@@ -9,7 +9,7 @@ int	main(int ac, char **av) {
 		rpn(av[1], 0);
 	}
 	catch(const std::exception& e) {
-		std::cerr << REDCOLOR << e.what() << ENDCOLOR << std::endl;
+		std::cerr << _RED << e.what() << _CLEAR << std::endl;
 	}
 	return 0;
 }

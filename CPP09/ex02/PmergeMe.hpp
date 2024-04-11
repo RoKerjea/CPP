@@ -22,11 +22,18 @@
 #define _MAGENTA "\e[35m"
 #define _CLEAR "\e[0m"
 
+enum{
+	VEC,
+	LST,
+};
+
 class PmergeMe
 {
 	private:
 		std::vector<int> _vec;
-		// list<int> _lst;
+		// std::list<int> _lst;
+		//clock_t startTime[2];
+		//clock_t endTime[2];
 	public:
 		PmergeMe(int ac, char **av);
 		~PmergeMe();

@@ -1,56 +1,8 @@
-/*gpt proposition, to explore and understand better*/
 #include <iostream>
 #include <vector>
 #include <list>
 #include <algorithm>
 #include <ctime>
-
-// void mergeInsertSort(std::vector<int>& vec) {
-//     if (vec.size() <= 1)
-//         return;
-
-//     std::vector<int>::iterator middle = vec.begin() + vec.size() / 2;
-//     std::vector<int> left(vec.begin(), middle);
-//     std::vector<int> right(middle, vec.end());
-
-//     mergeInsertSort(left);
-//     mergeInsertSort(right);
-
-//     std::merge(left.begin(), left.end(), right.begin(), right.end(), vec.begin());
-// }
-
-// void mergeInsertSort(std::list<int>& lst) {
-//     if (lst.size() <= 1)
-//         return;
-
-//     std::list<int> left, right;
-//     std::list<int>::iterator middle = lst.begin();
-//     std::advance(middle, lst.size() / 2);
-
-//     left.splice(left.begin(), lst, lst.begin(), middle);
-//     right.splice(right.begin(), lst, lst.begin(), lst.end());
-
-//     mergeInsertSort(left);
-//     mergeInsertSort(right);
-
-//     std::merge(left.begin(), left.end(), right.begin(), right.end(), lst.begin());
-// }
-
-// void displaySequence(const std::vector<int>& vec) {
-//     std::cout << "Unsorted sequence: ";
-//     for (std::vector<int>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
-//         std::cout << *it << " ";
-//     }
-//     std::cout << std::endl;
-// }
-
-// void displaySequence(const std::list<int>& lst) {
-//     std::cout << "Unsorted sequence: ";
-//     for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); ++it) {
-//         std::cout << *it << " ";
-//     }
-//     std::cout << std::endl;
-// }
 
 // int main() {
 //     const int NUM_INTEGERS = 3000;
@@ -108,11 +60,4 @@ int main(int ac, char** av)
 	//checkArgs();
 	pm.Print_vec();
 	pm.Sort_vec();
-	// std::cout << "index after 2: " << pm.jacobsthal_index(2) << std::endl;
-	// std::cout << "index after 4: " << pm.jacobsthal_index(4) << std::endl;
-	// std::cout << "index after 85: " << pm.jacobsthal_index(85) << std::endl;
-	// std::cout << "index after 10: " << pm.jacobsthal_index(10) << std::endl;
-	// std::cout << "index after 11: " << pm.jacobsthal_index(11) << std::endl;
-	// std::cout << "index after 12: " << pm.jacobsthal_index(12) << std::endl;
-	// std::cout << "index after 13: " << pm.jacobsthal_index(13) << std::endl;
 }
