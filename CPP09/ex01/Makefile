@@ -30,7 +30,7 @@ SRCS		= 	main.cpp \
 HEADER		= 	RPN.hpp
 
 RM			= rm -rf
-NAME		= btc
+NAME		= RPN
 CC			= c++ $(CFLAGS)
 
 OBJECTS		= $(subst /,/build/,${SRCS:.cpp=.o})

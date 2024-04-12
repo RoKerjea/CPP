@@ -1,28 +1,22 @@
+#ifndef RPN_HPP
+#define RPN_HPP
+
 #include <iostream>
+#include <exception>
+#include <cctype>
 #include <stack>
+#include <cstdlib>
+#define REDCOLOR "\033[1;31m"
+#define GRNCOLOR "\033[1;32m"
+#define ENDCOLOR "\033[0m"
 
-#define _RED "\e[0;31m"
-#define _GREEN "\e[0;32m"
-#define _YELLOW "\e[33m"
-#define _MAGENTA "\e[35m"
-#define _CLEAR "\e[0m"
+struct	operandFunctions_s {
+	char	op;
+	int	(*f)(int nb1, int nb2);
+};
 
-bool	allowedOp(char c);
-
-static bool	illogicSyntax(char *av, int i, int nbCount, int opCount);
-
-static bool	syntaxError(char *av, int i, int nbCount);
-
-static bool	divideByZero(char *av, int i);
-
-void	checkArgumentErrors(int ac, char *av, int i);
-
-static int	add(int nb1, int nb2);
-
-static int	minus(int nb1, int nb2);
-
-static int	multiply(int nb1, int nb2);
-
-static int	divide(int nb1, int nb2);
-
+bool	operands(char c);
+void	checkErrors(int ac, char *av, int i);
 void	rpn(char *av, int i);
+
+#endif
