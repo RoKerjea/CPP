@@ -8,7 +8,7 @@ PmergeMe::PmergeMe(int ac, char **av)
 PmergeMe::~PmergeMe()
 {}
 
-std::vector<ValueIndex> PmergeMe::convert_to_value_index(std::vector<int> &vec)
+std::vector<ValueIndex> PmergeMe::convert_to_value_index_vec(std::vector<int> &vec)
 {
 	std::vector<ValueIndex> value_index_vec;
 	for (unsigned long i = 0; i < vec.size(); i++)
@@ -18,7 +18,19 @@ std::vector<ValueIndex> PmergeMe::convert_to_value_index(std::vector<int> &vec)
 	return value_index_vec;
 }
 
-std::vector<int> PmergeMe::convert_to_int(std::vector<ValueIndex> &value_index_vec)
+std::list<ValueIndex> PmergeMe::convert_to_value_index_lst(std::list<int> &lst)
+{
+	std::list<ValueIndex> value_index_lst;
+	unsigned int i = 0;
+	for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); i++)
+	{
+		value_index_lst.push_back(ValueIndex(*it, i));
+		it++;
+	}
+	return value_index_lst;
+}
+
+std::vector<int> PmergeMe::convert_to_int_vec(std::vector<ValueIndex> &value_index_vec)
 {
 	std::vector<int> int_vec;
 	for (unsigned long i = 0; i < value_index_vec.size(); i++)
@@ -27,8 +39,17 @@ std::vector<int> PmergeMe::convert_to_int(std::vector<ValueIndex> &value_index_v
 	}
 	return int_vec;
 }
+std::list<int> PmergeMe::convert_to_int_lst(std::list<ValueIndex> &value_index_lst)
+{
+	std::list<int> int_lst;
+	for (std::list<ValueIndex>::const_iterator it = value_index_lst.begin(); it != value_index_lst.end(); it++)
+	{
+		int_lst.push_back(it->getValue());
+	}
+	return int_lst;
+}
 
-std::vector<unsigned long> PmergeMe::convert_to_index(std::vector<ValueIndex> &value_index_vec)
+std::vector<unsigned long> PmergeMe::convert_to_index_vec(std::vector<ValueIndex> &value_index_vec)
 {
 	std::vector<unsigned long> index_vec;
 	for (unsigned long i = 0; i < value_index_vec.size(); i++)
@@ -38,28 +59,83 @@ std::vector<unsigned long> PmergeMe::convert_to_index(std::vector<ValueIndex> &v
 	return index_vec;
 }
 
+std::list<unsigned long> PmergeMe::convert_to_index_lst(std::list<ValueIndex> &value_index_lst)
+{
+	std::list<unsigned long> index_lst;
+	for (std::list<ValueIndex>::const_iterator it = value_index_lst.begin(); it != value_index_lst.end(); it++)
+	{
+		index_lst.push_back(it->getIndex());
+	}
+	return index_lst;
+}
 void PmergeMe::Sort_vec()
 {
 	//save start time
+	this->startTime[VEC] = clock();
 	std::vector<unsigned long> sorted_vec = Merge_insert_vec(_vec);
 	std::vector<int> int_sorted_vec;
 	for (unsigned long i = 0; i < sorted_vec.size(); i++)
 	{
 		int_sorted_vec.push_back(_vec[sorted_vec[i]]);
 	}
+	this->endTime[VEC] = clock();
 	std::cout << "sorted vector" << std::endl;
 	for (std::vector<int>::const_iterator it = int_sorted_vec.begin(); it != int_sorted_vec.end(); ++it) {
 		std::cout << *it << " ";
 	}
+	std::cout << std::endl;
+	std::cout	<< _YELLOW << "Time to process a range of " << _vec.size() << " elements with std::vector: "
+				<< this->endTime[VEC] - this->startTime[VEC] << " us"  << _CLEAR << std::endl;
 	//the vector should be sorted
 	//print the vector
 	//print the number of comparaisons
 	//print the time it took to sort the vector (start time - end time)
 }
 
+void PmergeMe::Sort_lst()
+{
+	//save start time
+	this->startTime[LST] = clock();
+	//list of index of the elements in _lst, sorted
+	std::list<unsigned long> sorted_lst = Merge_insert_lst(_lst);
+	//new list of sorted elements. created from the sorted index
+	std::list<int> int_sorted_lst;
+	for (std::list<unsigned long>::const_iterator it = sorted_lst.begin(); it != sorted_lst.end(); it++)
+	{
+		std::list<int>::const_iterator front = _lst.begin();
+		std::advance(front, *it);
+		int_sorted_lst.push_back(*front);
+	}
+/*
+	for (std::list<ValueIndex>::const_iterator it = value_index_lst.begin(); it != value_index_lst.end(); it++)
+	{
+		index_lst.push_back(it->getIndex());
+	}*/
+	this->endTime[LST] = clock();
+	std::cout << "sorted list" << std::endl;
+	for (std::list<int>::const_iterator it = int_sorted_lst.begin(); it != int_sorted_lst.end(); ++it) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+	std::cout	<< _YELLOW << "Time to process a range of " << _lst.size() << " elements with std::list: "
+				<< this->endTime[LST] - this->startTime[LST] << " us"  << _CLEAR << std::endl;
+	//the list should be sorted
+	//print the list
+	//print the number of comparaisons
+	//print the time it took to sort the list (start time - end time)
+}
+
 void PmergeMe::Print_vec()
 {
 	for (std::vector<int>::const_iterator it = _vec.begin(); it != _vec.end(); ++it) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::Print_lst()
+{
+	for (std::list<int>::const_iterator it = _lst.begin(); it != _lst.end(); ++it) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
@@ -77,24 +153,30 @@ bool vec_is_sorted(std::vector<ValueIndex> &vec)
 	return true;
 }
 
-// std::vector<int> sort_vec_index(std::vector<int> &vec)
-// {
-// 	//can i find the the list of index of the vector, after sorting it?
-// 	//i can create a vector of pairs, with the first element being the value, and the second element being the index
-// }
-
+bool lst_is_sorted(std::list<ValueIndex> &lst)
+{
+	for (std::list<ValueIndex>::const_iterator it = lst.begin(); it != lst.end(); it++)
+	{
+		if (*it > *it++)
+		{
+			return false;
+		}
+		it--;
+	}
+	return true;
+}
 
 std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 {
-	std::vector<ValueIndex> vec = convert_to_value_index(intvec);
+	std::vector<ValueIndex> vec = convert_to_value_index_vec(intvec);
 	if (vec_is_sorted(vec))
 	{
-		return convert_to_index(vec);
+		return convert_to_index_vec(vec);
 	}
 	if (vec.size() == 2)
 	{
 		std::swap(vec[0], vec[1]);
-		return convert_to_index(vec);
+		return convert_to_index_vec(vec);
 	}
 	//FIRST STEP: make pair of elements in the vector
 	std::vector<std::pair<ValueIndex, ValueIndex> > pairs;
@@ -117,28 +199,16 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 		//a comparaison as been made in each iteration of the loop
 		//comp count ++??
 	}
-	std::cout << "list of pairs after sorting inside the pairs" << std::endl;
-	for (unsigned long i = 0; i < pairs.size(); i++)
-	{
-		std::cout << pairs[i].first << " " << pairs[i].second << std::endl;
-	}
 	//create a new vector with the value of each "first" in the pair => main_chain
 	std::vector<ValueIndex> main_chain;
 	for (unsigned long i = 0; i < pairs.size(); i++)
 	{
 		main_chain.push_back(pairs[i].first);
 	}
-	std::cout << "main chain" << std::endl;
-	for (unsigned long i = 0; i < main_chain.size(); i++)
-	{
-		std::cout << main_chain[i] << " ";
-	}
-	std::cout << std::endl;
-
 	//THIRD STEP: recursively sort the pairs, using the larger element of each pair
 	//call merge_insert_vec on the main chain
 	//merge_insert_vec will sort the main chain, and return a sorted vector
-	std::vector<int> main_chain_int = convert_to_int(main_chain);
+	std::vector<int> main_chain_int = convert_to_int_vec(main_chain);
 	std::vector<unsigned long> pair_sorted_index = Merge_insert_vec(main_chain_int);
 	main_chain.clear();
 	std::vector<ValueIndex> pending_chain;
@@ -147,21 +217,10 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 		main_chain.push_back(pairs[pair_sorted_index[i]].first);
 		pending_chain.push_back(pairs[pair_sorted_index[i]].second);
 	}
-	std::cout << "main chain after sort" << std::endl;
-	for (unsigned long i = 0; i < main_chain.size(); i++)
-	{
-		std::cout << main_chain[i] << " ";
-	}
-	std::cout << std::endl;
 	//add the pending element (if any) to the pending list of elements
 	if (pending_element != ValueIndex(-1, -1))
 	{
 		pending_chain.push_back(pending_element);
-	}
-	std::cout << "pending chain after ordering" << std::endl;
-	for (unsigned long i = 0; i < pending_chain.size(); i++)
-	{
-		std::cout << pending_chain[i] << " ";
 	}
 	std::cout << std::endl;
 	//get first element of the pending list of elements to be the first element of the main chain (b0 in book)
@@ -171,67 +230,147 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	unsigned long pending_index = 0;
 	for (unsigned long i = 0; i < pending_chain.size() - 1; i++)
 	{
-		std::cout << _YELLOW << "start of iteration " << i << _CLEAR << std::endl;
-		std::cout << "pending chain : " << std::endl;
-		for (unsigned long i = 0; i < pending_chain.size(); i++)
-		{
-			std::cout << pending_chain[i] << " ";
-		}
-		std::cout << std::endl;
-		std::cout << "main chain : " << std::endl;
-		for (unsigned long i = 0; i < main_chain.size(); i++)
-		{
-			std::cout << main_chain[i] << " ";
-		}
-		std::cout << std::endl;
 		if (jacobsthal_index(pending_index) > pending_chain.size() - 1)
 		{
-			std::cout << "jacobsthal index is out of range" << std::endl;
 			pending_index = pending_chain.size() - 1;
 		}
 		else
 			pending_index = jacobsthal_index(pending_index);
 		ValueIndex pending_index_value = pending_chain[pending_index];
-		std::cout << "pending index: " << pending_index << std::endl;
-		std::cout << "pending value to insert: " << pending_index_value << std::endl;
 		//get insert position, using a binary search
-		unsigned long insert_position = binary_insert_position(main_chain, 0, main_chain.size() - 1, pending_index_value);
+		unsigned long insert_position = binary_insert_position_vec(main_chain, 0, main_chain.size() - 1, pending_index_value);
 		//insert pending[index] in main chain at insert position
 		main_chain.insert(main_chain.begin() + insert_position, pending_index_value);
 	}
-	return convert_to_index(main_chain);
+	return convert_to_index_vec(main_chain);
 }
 
-unsigned long PmergeMe::binary_insert_position(std::vector<ValueIndex> &main_chain, unsigned long start, unsigned long end, ValueIndex value)
+std::list<unsigned long> PmergeMe::Merge_insert_lst(std::list<int> &intlst)
+{
+	std::list<ValueIndex> lst = convert_to_value_index_lst(intlst);
+	if (lst_is_sorted(lst))
+	{
+		return convert_to_index_lst(lst);
+	}
+	if (lst.size() == 2)
+	{
+		lst.reverse();
+		return convert_to_index_lst(lst);
+	}
+	//FIRST STEP: make pair of elements in the list
+	std::list<std::pair<ValueIndex, ValueIndex> > pairs;
+	for(std::list<ValueIndex>::const_iterator it = lst.begin(); it != lst.end(); std::advance(it , 2))
+	{
+		ValueIndex second = *(it++);
+		it--;
+		pairs.push_back(std::make_pair(*it, second));
+	}
+	ValueIndex pending_element = ValueIndex(-1, -1);
+	if (lst.size() % 2 != 0)
+	{
+		pending_element = *lst.end();
+	}
+	//SECOND STEP: order inside the pairs,first > second
+	for (std::list<std::pair<ValueIndex, ValueIndex> >::const_iterator it = pairs.begin(); it != pairs.end(); it++)
+	{
+		if (it->first < it->second)
+		{
+			//TODO swap correctly
+			// ValueIndex second = it->second;
+			// it->second = it->first;
+			// it->first = second;
+		}
+	}
+	//create a new list with the value of each "first" in the pair => main_chain
+	std::list<ValueIndex> main_chain;
+	for (std::list<std::pair<ValueIndex, ValueIndex> >::const_iterator it = pairs.begin(); it != pairs.end(); it++)
+	{
+		main_chain.push_back(it->first);
+	}
+	//THIRD STEP: recursively sort the pairs, using the larger element of each pair
+	//call merge_insert_lst on the main chain
+	//merge_insert_lst will sort the main chain, and return a sorted list
+	std::list<int> main_chain_int = convert_to_int_lst(main_chain);
+	std::list<unsigned long> pair_sorted_index = Merge_insert_lst(main_chain_int);
+	main_chain.clear();
+	std::list<ValueIndex> pending_chain;
+	for (std::list<unsigned long>::const_iterator it_pair = pair_sorted_index.begin(); it_pair != 	pair_sorted_index.end(); it_pair++)
+	{
+		std::list<std::pair<ValueIndex, ValueIndex> >::const_iterator it = pairs.begin();
+		std::advance(it, *it_pair);
+		//need to get the pairs element at index pair_sorted_index *it
+		main_chain.push_back(it->first);
+		pending_chain.push_back(it->second);
+	}
+	//add the pending element (if any) to the pending list of elements
+	if (pending_element != ValueIndex(-1, -1))
+	{
+		pending_chain.push_back(pending_element);
+	}
+	//get first element of the pending list of elements to be the first element of the main chain (b0 in book)
+	main_chain.insert(main_chain.begin(), pending_chain[0]);
+	//FOURTH : merge the pending unsorted elements of the pairs in the final list
+	//using the jacobsthal sequence to find the next element of the pending chain to insert to the main chain
+	unsigned long pending_index = 0;
+	for (unsigned long i = 0; i < pending_chain.size() - 1; i++)
+	{
+		if (jacobsthal_index(pending_index) > pending_chain.size() - 1)
+		{
+			pending_index = pending_chain.size() - 1;
+		}
+		else
+			pending_index = jacobsthal_index(pending_index);
+		ValueIndex pending_index_value = pending_chain[pending_index];
+		//get insert position, using a binary search
+		unsigned long insert_position = binary_insert_position_lst(main_chain, 0, main_chain.size() - 1, pending_index_value);
+		//insert pending[index] in main chain at insert position
+		main_chain.insert(main_chain.begin() + insert_position, pending_index_value);
+	}
+	return convert_to_index_lst(main_chain);
+}
+
+unsigned long PmergeMe::binary_insert_position_vec(std::vector<ValueIndex> &main_chain, unsigned long start, unsigned long end, ValueIndex value)
 {
 	if (end < start)
 	{
 		return start;
 	}
     unsigned long mid = (start + end) / 2;
-	// std::cout << "start: " << start << std::endl;
-	// std::cout << "end: " << end << std::endl;
-	// std::cout << "mid: " << mid << std::endl;
-	// std::cout << "value: " << value << std::endl;
-	// std::cout << "size of main chain: " << main_chain.size() << std::endl;
 	if (mid == 0)
 	{
 		return 0;
 	}
-	// for (unsigned long i = 0; i < main_chain.size(); i++)
-	// {
-	// 	std::cout << main_chain[i] << " ";
-	// }
-	// std::cout << std::endl;
 	if (value == main_chain[mid])
 	{
 		return mid + 1;
 	}
 	if (value > main_chain[mid])
 	{
-		return binary_insert_position(main_chain, mid + 1, end, value);
+		return binary_insert_position_vec(main_chain, mid + 1, end, value);
 	}
-	return binary_insert_position(main_chain, start, mid - 1, value);
+	return binary_insert_position_vec(main_chain, start, mid - 1, value);
+}
+
+unsigned long PmergeMe::binary_insert_position_lst(std::list<ValueIndex> &main_chain, unsigned long start, unsigned long end, ValueIndex value)
+{
+	if (end < start)
+	{
+		return start;
+	}
+    unsigned long mid = (start + end) / 2;
+	if (mid == 0)
+	{
+		return 0;
+	}
+	if (value == main_chain[mid])
+	{
+		return mid + 1;
+	}
+	if (value > main_chain[mid])
+	{
+		return binary_insert_position_lst(main_chain, mid + 1, end, value);
+	}
+	return binary_insert_position_lst(main_chain, start, mid - 1, value);
 }
 
 //need a function to get the next index to add to the main chain
