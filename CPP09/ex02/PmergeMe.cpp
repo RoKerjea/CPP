@@ -80,7 +80,7 @@ void PmergeMe::Sort_vec()
 		int_sorted_vec.push_back(_vec[sorted_vec[i]]);
 	}
 	this->endTime[VEC] = clock();
-	std::cout << "sorted vector" << std::endl;
+	std::cout << "after vector sort :";
 	for (std::vector<int>::const_iterator it = int_sorted_vec.begin(); it != int_sorted_vec.end(); ++it) {
 		std::cout << *it << " ";
 	}
@@ -115,7 +115,7 @@ void PmergeMe::Sort_lst()
 		index_lst.push_back(it->getIndex());
 	}*/
 	this->endTime[LST] = clock();
-	std::cout << "sorted list" << std::endl;
+	std::cout << "after list sort :";
 	for (std::list<int>::const_iterator it = int_sorted_lst.begin(); it != int_sorted_lst.end(); ++it) {
 		std::cout << *it << " ";
 	}
@@ -130,6 +130,7 @@ void PmergeMe::Sort_lst()
 
 void PmergeMe::Print_vec()
 {
+	std::cout << "before : ";
 	for (std::vector<int>::const_iterator it = _vec.begin(); it != _vec.end(); ++it) {
 		std::cout << *it << " ";
 	}
@@ -138,6 +139,7 @@ void PmergeMe::Print_vec()
 
 void PmergeMe::Print_lst()
 {
+	std::cout << "before : ";
 	for (std::list<int>::const_iterator it = _lst.begin(); it != _lst.end(); ++it) {
 		std::cout << *it << " ";
 	}
@@ -240,7 +242,7 @@ std::vector<unsigned long> PmergeMe::Merge_insert_vec(std::vector<int> &intvec)
 	{
 		pending_chain.push_back(pending_element);
 	}
-	std::cout << std::endl;
+	// std::cout << std::endl;
 	//get first element of the pending list of elements to be the first element of the main chain (b0 in book)
 	main_chain.insert(main_chain.begin(), pending_chain[0]);
 	//FOURTH : merge the pending unsorted elements of the pairs in the final vector
