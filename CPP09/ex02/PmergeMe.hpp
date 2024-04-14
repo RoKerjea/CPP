@@ -12,6 +12,8 @@
 #include <exception>
 #include <algorithm>
 #include <cstddef>
+#include <limits>
+#include <string>
 #include "ValueIndex.hpp"
 //Note: can i count the number of comparaisons that were made?
 //that would be a good way to prove i used ford-Johnson correctly

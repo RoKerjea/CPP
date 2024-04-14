@@ -59,6 +59,7 @@ int main(int ac, char** av)
 	PmergeMe pm(ac, av);
 	//checkArgs();
 	pm.Print_vec();
+	pm.Print_lst();
 	pm.Sort_vec();
-	
+	pm.Sort_lst();
 }
