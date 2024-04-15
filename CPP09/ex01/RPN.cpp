@@ -44,7 +44,7 @@ static bool	syntaxError(char *av, int i, int nbCount)
 {
 	if (incorrectOrder(av, 0, 0, 0) == true)
 		return true ;
-	while (av[i]) 
+	while (av[i])
 	{
 		if (isdigit(av[i]))
 			nbCount++;
@@ -65,7 +65,7 @@ void	checkErrors(int ac, char *av, int i)
 {
 	if (ac != 2)
 		throw std::invalid_argument("Error");
-	while (av[i]) 
+	while (av[i])
 	{
 		if ((!isdigit(av[i])) && operands(av[i]) == false && av[i] != ' ')
 			throw std::invalid_argument("Error");
@@ -99,7 +99,7 @@ void	rpn(char *av, int i)
 		{'/', &divide}
 	};
 
-	while (av[i]) 
+	while (av[i])
 	{
 		if (isdigit(av[i]))
 			data.push(atoi(av + i));

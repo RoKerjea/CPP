@@ -3,14 +3,14 @@ RPN is conceived with stack as a tool, push and pop by order of reading
 so stack seems a logical choice*/
 #include "RPN.hpp"
 
-int	main(int ac, char **av) 
+int	main(int ac, char **av)
 {
-	try 
+	try
 	{
 		checkErrors(ac, av[1], 0);
 		rpn(av[1], 0);
 	}
-	catch(const std::exception& e) 
+	catch(const std::exception& e)
 	{
 		std::cerr << REDCOLOR << e.what() << ENDCOLOR << std::endl;
 	}
